@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+        "spec": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:zhangtasdq/cordova-plugin-aestool.git",
+          "sshUrl": "git+ssh://git@github.com/zhangtasdq/cordova-plugin-aestool.git",
+          "httpsUrl": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+          "gitUrl": "git://github.com/zhangtasdq/cordova-plugin-aestool.git",
+          "shortcut": "github:zhangtasdq/cordova-plugin-aestool",
+          "directUrl": "https://raw.githubusercontent.com/zhangtasdq/cordova-plugin-aestool/master/package.json"
+        }
+      },
+      "/home/zhang/work/vue/InfoManager/node_modules"
+    ]
+  ],
+  "_from": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+  "_id": "cordova-plugin-aestool@0.0.1",
+  "_inCache": true,
+  "_location": "/cordova-plugin-aestool",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+    "spec": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:zhangtasdq/cordova-plugin-aestool.git",
+      "sshUrl": "git+ssh://git@github.com/zhangtasdq/cordova-plugin-aestool.git",
+      "httpsUrl": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+      "gitUrl": "git://github.com/zhangtasdq/cordova-plugin-aestool.git",
+      "shortcut": "github:zhangtasdq/cordova-plugin-aestool",
+      "directUrl": "https://raw.githubusercontent.com/zhangtasdq/cordova-plugin-aestool/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git#691151c15478ce249c0aa0d7ebf41783930bd96b",
+  "_shasum": "17ab48b824557b375ff06be6300b4297e8e97a56",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/zhangtasdq/cordova-plugin-aestool.git",
+  "_where": "/home/zhang/work/vue/InfoManager/node_modules",
+  "author": {
+    "name": "zhang"
+  },
+  "bugs": {
+    "url": "https://github.com/zhangtasdq/cordova-plugin-aestool/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-aestool",
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "description": "cordova aes plugin",
+  "devDependencies": {},
+  "gitHead": "691151c15478ce249c0aa0d7ebf41783930bd96b",
+  "homepage": "https://github.com/zhangtasdq/cordova-plugin-aestool#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-aestool",
+  "optionalDependencies": {},
+  "readme": "cordova-plugin-aestool\n===\n> Simple API to perform AES encryption on cordova，\n> Just a simple encapsulation of `AESCrypt-Android`\n\nExample\n---\n\n### encryption\n```javaScript\nlet Aestool = cordova.plugins.Aestool;\n\nAestool.encrypt(password, content, (error, data) => {\n    if (error) {\n        ....\n    } else {\n        ....\n    }\n});\n```\n\n### Decrypted\n\n```javaScript\nlet Aestool = cordova.plugins.Aestool;\n\nAestool.decrypt(password, content, (error, data) => {\n    if (error) {\n        ....\n    } else {\n        ....\n    }\n});\n```\n\nThanks\n---\n[AESCrypt-Android](https://github.com/scottyab/AESCrypt-Android)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangtasdq/cordova-plugin-aestool.git"
+  },
+  "version": "0.0.1"
+}

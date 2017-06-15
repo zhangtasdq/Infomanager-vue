@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+        "spec": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:zhangtasdq/cordova-plugin-onedrivetool.git",
+          "sshUrl": "git+ssh://git@github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+          "httpsUrl": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+          "gitUrl": "git://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+          "shortcut": "github:zhangtasdq/cordova-plugin-onedrivetool",
+          "directUrl": "https://raw.githubusercontent.com/zhangtasdq/cordova-plugin-onedrivetool/master/package.json"
+        }
+      },
+      "/home/zhang/work/vue/InfoManager/node_modules"
+    ]
+  ],
+  "_from": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+  "_id": "cordova-plugin-onedrivetool@0.0.1",
+  "_inCache": true,
+  "_location": "/cordova-plugin-onedrivetool",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+    "spec": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:zhangtasdq/cordova-plugin-onedrivetool.git",
+      "sshUrl": "git+ssh://git@github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+      "httpsUrl": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+      "gitUrl": "git://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+      "shortcut": "github:zhangtasdq/cordova-plugin-onedrivetool",
+      "directUrl": "https://raw.githubusercontent.com/zhangtasdq/cordova-plugin-onedrivetool/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git#3e9f075f0563a191249bb410caf9d69573485620",
+  "_shasum": "c426fe880ea6f51baa7f5b6f047269597563f341",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
+  "_where": "/home/zhang/work/vue/InfoManager/node_modules",
+  "author": {
+    "name": "zhang"
+  },
+  "bugs": {
+    "url": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-onedrivetool",
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "description": "cordova onedrive plugin",
+  "devDependencies": {},
+  "gitHead": "3e9f075f0563a191249bb410caf9d69573485620",
+  "homepage": "https://github.com/zhangtasdq/cordova-plugin-onedrivetool#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-onedrivetool",
+  "optionalDependencies": {},
+  "readme": "cordova-plugin-onedrivetool\n===\n> download file from `onedrive approot` or upload file to `onedrive approot`，\n> Just a simple encapsulation of `onedrive-sdk-android`\n\nExample\n---\n\n### Check file exist\n\n```javascript\nlet OneDriveTool = cordova.plugins.OneDriveTool;\n\nOneDriveTool.isFileExists(fileName, clientId, scope, (fileExistError, isExist) => {\n    if (fileExistError) {\n        ...\n    } else {\n        ...\n    }\n});\n```\n\n### Upload file\n\n```javascript\nlet OneDriveTool = cordova.plugins.OneDriveTool;\n\nOneDriveTool.saveFile(fileName, content, clientId, scope, (saveError) => {\n    if (saveError) {\n        ...\n    } else {\n        ...\n    }\n});\n```\n\n### Download File\n\n```javascript\nlet OneDriveTool = cordova.plugins.OneDriveTool;\n\nOneDriveTool.downloadFile(fileName, clientId, scope, (downloadError, data) => {\n    if (downloadError) {\n        ...\n    } else {\n        ...\n    }\n});\n\n```\n\nThanks\n---\n[onedrive-sdk-android](https://github.com/OneDrive/onedrive-sdk-android)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zhangtasdq/cordova-plugin-onedrivetool.git"
+  },
+  "version": "0.0.1"
+}
