@@ -25,6 +25,10 @@
     </VDrawerLayout>
     <VList labelProperty="name" idProperty="id" :datas="datas" @onClickItem="handleClickItem" />
     <VTab :tabs="tabs" :scale="2.5" @onClickItem="handleClickTab" />
+    <VNavBar title="hello">
+         <VButton btnLabel="hello" btnSize="large" @btnClick="handleBtnClick" slot="left" />
+         <VButton btnLabel="world" btnSize="large" @btnClick="handleBtnClick" slot="right" />
+    </VNavBar>
   </div>
 </template>
 
@@ -35,6 +39,7 @@ import VFormGroup from "./FormGroup";
 import VDrawerLayout from "./DrawerLayout";
 import VList from "./List";
 import VTab from "./Tab";
+import VNavBar from "./NavBar";
 
 export default {
   name: 'hello',
@@ -75,7 +80,8 @@ export default {
     VFormGroup,
     VDrawerLayout,
     VList,
-    VTab
+    VTab,
+    VNavBar
   },
 
   methods: {
