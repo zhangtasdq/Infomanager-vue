@@ -18,13 +18,15 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
     <VButton btnLabel="hello world" btnSize="large" @btnClick="handleBtnClick" />
-    <VInput ref="input" initValue="zhang" />
+    <VInput ref="input" initValue="zhang" />  
+    <VFormGroup ref="formgroup" initValue="zhang" label="world" />
   </div>
 </template>
 
 <script>
 import VButton from "./Button";
 import VInput from "./Input";
+import VFormGroup from "./FormGroup";
 
 export default {
   name: 'hello',
@@ -34,8 +36,9 @@ export default {
     }
   },
   components: {
-    "VButton": VButton,
-    "VInput": VInput
+    VButton,
+    VInput,
+    VFormGroup
   },
 
   methods: {
