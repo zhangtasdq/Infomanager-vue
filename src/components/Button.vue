@@ -68,7 +68,7 @@ export default {
     }
 
     &.btn-large {
-        padding: 1em 4em;
+        padding: 0.8em 4em;
         font-size: 1.2em;
     }
 }

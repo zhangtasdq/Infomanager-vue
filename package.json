@@ -24,7 +24,8 @@
     "vue-awesome": "^2.3.1",
     "vue-i18n": "^7.0.3",
     "vue-router": "^2.3.1",
-    "vue-style-loader": "^3.0.1"
+    "vue-style-loader": "^3.0.1",
+    "vue-toasted": "^1.0.28"
   },
   "cordova": {
     "plugins": {

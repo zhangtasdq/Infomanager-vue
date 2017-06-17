@@ -1,5 +1,5 @@
 <template>
-  <input class="input" ref="input" :value="initValue"/>
+  <input class="input" ref="input" :placeholder="placeholder" :type="inputType" :value="initValue"/>
 </template>
 
 <script>
@@ -9,6 +9,16 @@ export default {
 
     props: {
         initValue: {
+            type: String,
+            default: ""
+        },
+
+        inputType: {
+            type: String,
+            default: "text"
+        },
+
+        placeholder: {
             type: String,
             default: ""
         }
@@ -27,15 +37,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/css/variable.scss";
+
 .input {
+    box-sizing: border-box;
     display: block;
     width: 100%;
-    height: 34px;
+    height: 50px;
     padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
     outline: none;
-    color: #555;
+    color: $font-color;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -47,9 +58,8 @@ export default {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
     &:focus {
-        border-color: #66afe9;
+        border-color: $input-focus-border-color;
         outline: 0;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
     }
 }
