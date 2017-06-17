@@ -18,11 +18,13 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
     <VButton btnLabel="hello world" btnSize="large" @btnClick="handleBtnClick" />
+    <VInput ref="input" initValue="zhang" />
   </div>
 </template>
 
 <script>
 import VButton from "./Button";
+import VInput from "./Input";
 
 export default {
   name: 'hello',
@@ -32,7 +34,13 @@ export default {
     }
   },
   components: {
-    "VButton": VButton
+    "VButton": VButton,
+    "VInput": VInput
+  },
+
+  methods: {
+    handleBtnClick: function() {
+    }
   }
 }
 </script>
