@@ -23,6 +23,7 @@
     <VDrawerLayout v-bind:show.sync="showDrawlayout" :expandWidth="400" ref="drawlayout">
         <h1>好好学习，天天向上</h1>
     </VDrawerLayout>
+    <VList labelProperty="name" idProperty="id" :datas="datas" @onClickItem="handleClickItem" />
   </div>
 </template>
 
@@ -31,24 +32,39 @@ import VButton from "./Button";
 import VInput from "./Input";
 import VFormGroup from "./FormGroup";
 import VDrawerLayout from "./DrawerLayout";
+import VList from "./List";
 
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      showDrawlayout: false
+      showDrawlayout: false,
+      datas: [
+        {
+          id: "1",
+          name: "z"
+        },
+        {
+          id: "2",
+          name: "t"
+        }
+      ]
     }
   },
   components: {
     VButton,
     VInput,
     VFormGroup,
-    VDrawerLayout
+    VDrawerLayout,
+    VList
   },
 
   methods: {
     handleBtnClick: function() {
+    },
+
+    handleClickItem: function(data) {
     }
   }
 }
