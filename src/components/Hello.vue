@@ -35,6 +35,10 @@
     <VDialog :isShow="isShowDialog">
         <h1>hello world</h1>
     </VDialog>
+
+    <VPanel title="hello" style="margin-top: 1em;">
+      <h2>好好学习，天天向上</h2>
+    </VPanel> 
   </div>
 </template>
 
@@ -48,6 +52,7 @@ import VTab from "./Tab";
 import VNavBar from "./NavBar";
 import VLoading from "./Loading";
 import VDialog from "./Dialog";
+import VPanel from "./Panel"
 
 export default {
   name: 'hello',
@@ -93,7 +98,8 @@ export default {
     VTab,
     VNavBar,
     VLoading,
-    VDialog
+    VDialog,
+    VPanel
   },
 
   methods: {

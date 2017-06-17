@@ -5,13 +5,26 @@ import App from './App'
 import router from './router'
 import "vue-awesome/icons"
 import Icon from "vue-awesome/components/Icon"
+import VueI18n from "vue-i18n"
+
+import AppConfig from "./configs/app-config";
+import Language from "./i18n";
+
 
 Vue.config.productionTip = false
+Vue.use(VueI18n);
 Vue.component("icon", Icon)
+
+const i18n = new VueI18n({
+  locale: AppConfig.language,
+  messages: Language
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  i18n
 })

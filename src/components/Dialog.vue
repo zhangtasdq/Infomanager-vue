@@ -24,7 +24,7 @@ export default {
 
 </script>
 
-<style scoped >
+<style lang="scss" scoped >
 
 .dialog {
     display: flex;
@@ -35,11 +35,11 @@ export default {
     right: 0;
     bottom: 0;
     background-color: rgba(20, 20, 20, 0.5);
-}
 
-.dialog .content-wrapper {
-    width: 100%;
-    text-align: center;
+    .content-wrapper {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 </style>
