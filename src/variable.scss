@@ -1,0 +1,13 @@
+$color: (
+    primary:    #488aff,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222
+);
+
+$primary_btn_color: map-get($color, primary);
+$primary_btn_active_color: #427FEA;
+$danger_btn_color: map-get($color,danger);
+$danger_btn_active_color: #e13838;
+
