@@ -24,6 +24,7 @@
         <h1>好好学习，天天向上</h1>
     </VDrawerLayout>
     <VList labelProperty="name" idProperty="id" :datas="datas" @onClickItem="handleClickItem" />
+    <VTab :tabs="tabs" :scale="2.5" @onClickItem="handleClickTab" />
   </div>
 </template>
 
@@ -33,6 +34,7 @@ import VInput from "./Input";
 import VFormGroup from "./FormGroup";
 import VDrawerLayout from "./DrawerLayout";
 import VList from "./List";
+import VTab from "./Tab";
 
 export default {
   name: 'hello',
@@ -49,6 +51,21 @@ export default {
           id: "2",
           name: "t"
         }
+      ],
+
+      tabs: [
+        {
+          id: 1,
+          icon: "cloud-upload"
+        },
+        {
+          id: 2,
+          icon: "cloud-download"
+        },
+        {
+          id: 3,
+          icon: "plus"
+        }
       ]
     }
   },
@@ -57,7 +74,8 @@ export default {
     VInput,
     VFormGroup,
     VDrawerLayout,
-    VList
+    VList,
+    VTab
   },
 
   methods: {
@@ -65,6 +83,10 @@ export default {
     },
 
     handleClickItem: function(data) {
+    },
+
+    handleClickTab: function(id) {
+      console.log(id);
     }
   }
 }

@@ -1,22 +1,30 @@
 <template>
 
-<li class="list-item" @click="handleClickItem">{{label}}</li>
+<li class="tab-item" @click="handleClickItem">
+   <icon :name="icon" :scale="scale" />
+</li>
 
 </template>
 
 <script>
 
 export default {
-    name: "v-list-item",
+    name: "v-tab-item",
+
     props: {
+        icon: {
+            type: String,
+            required: true
+        },
+
         id: {
             type: [String, Number],
             required: true
         },
 
-        label: {
-            type: String,
-            required: true
+        scale: {
+            type: Number,
+            default: 1
         }
     },
 
@@ -25,20 +33,14 @@ export default {
             this.$emit("onClickItem", this.id);
         }
     }
-
-};
+}
 
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/variable.scss";
 
-.list-item {
-    padding: 0.8em 0;
-    text-align: left;
-    background-color: #fff;
+.tab-item {
     cursor: pointer;
-    color: $font-color;
-
 }
+
 </style>

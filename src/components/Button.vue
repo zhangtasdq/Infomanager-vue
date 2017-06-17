@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../variable.scss";
+@import "../assets/css/variable.scss";
 
 @mixin btn-surface($normal, $active) {
     color: #fff;
