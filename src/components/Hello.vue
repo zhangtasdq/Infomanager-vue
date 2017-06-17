@@ -29,6 +29,7 @@
          <VButton btnLabel="hello" btnSize="large" @btnClick="handleBtnClick" slot="left" />
          <VButton btnLabel="world" btnSize="large" @btnClick="handleBtnClick" slot="right" />
     </VNavBar>
+    <VLoading :isShow="isShowLoading" :scale="4" />
   </div>
 </template>
 
@@ -40,6 +41,7 @@ import VDrawerLayout from "./DrawerLayout";
 import VList from "./List";
 import VTab from "./Tab";
 import VNavBar from "./NavBar";
+import VLoading from "./Loading";
 
 export default {
   name: 'hello',
@@ -47,6 +49,7 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       showDrawlayout: false,
+      isShowLoading: true,
       datas: [
         {
           id: "1",
@@ -81,7 +84,8 @@ export default {
     VDrawerLayout,
     VList,
     VTab,
-    VNavBar
+    VNavBar,
+    VLoading
   },
 
   methods: {
