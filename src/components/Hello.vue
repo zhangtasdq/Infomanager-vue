@@ -20,6 +20,9 @@
     <VButton btnLabel="hello world" btnSize="large" @btnClick="handleBtnClick" />
     <VInput ref="input" initValue="zhang" />  
     <VFormGroup ref="formgroup" initValue="zhang" label="world" />
+    <VDrawerLayout v-bind:show.sync="showDrawlayout" :expandWidth="400" ref="drawlayout">
+        <h1>好好学习，天天向上</h1>
+    </VDrawerLayout>
   </div>
 </template>
 
@@ -27,18 +30,21 @@
 import VButton from "./Button";
 import VInput from "./Input";
 import VFormGroup from "./FormGroup";
+import VDrawerLayout from "./DrawerLayout";
 
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      showDrawlayout: false
     }
   },
   components: {
     VButton,
     VInput,
-    VFormGroup
+    VFormGroup,
+    VDrawerLayout
   },
 
   methods: {
