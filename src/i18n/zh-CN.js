@@ -12,6 +12,7 @@ export default {
     name: "名称",
     content: "内容",
     delete: "删除",
+    showInfoTitle: "查看信息",
 
     placeholder: {
         pleaseInputPassword: "请输入密码",

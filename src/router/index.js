@@ -5,6 +5,7 @@ import Login from "@/views/Login";
 import InfoList from "@/views/InfoList";
 import InfoEdit from "@/views/InfoEdit";
 import InfoDetailEdit from "@/views/InfoDetailEdit";
+import InfoShow from "@/views/InfoShow";
 
 Vue.use(Router)
 
@@ -26,6 +27,10 @@ export default new Router({
       path: "/infoDetailEdit",
       name: "InfoDetailEdit",
       component: InfoDetailEdit
+    }, {
+      path: "/infoShow",
+      name: "InfoShow",
+      component: InfoShow
     }
   ]
 })

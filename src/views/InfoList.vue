@@ -54,6 +54,14 @@ export default {
                 this.goCreateInfo();
                 return;
             }
+
+            if (id === 2) {
+                this.goShowInfo();
+            }
+        },
+
+        goShowInfo() {
+            this.$router.push({name: "InfoShow"});
         },
 
         goCreateInfo() {
