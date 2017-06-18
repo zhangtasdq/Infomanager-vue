@@ -39,7 +39,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .login-view {
     padding: 8em 4em;
