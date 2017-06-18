@@ -1,6 +1,6 @@
 <template>
 
-<div class="login-view">
+<div class="login-view view">
     <VPanel :title="$t('login')">
         <VInput ref="passwordInput" inputType="password" :placeholder="$t('placeholder.pleaseInputPassword')" />
         <VButton :btnLabel="$t('login')" btnSize="large" @btnClick="handleClickLogin" />
@@ -43,6 +43,10 @@ export default {
 
 .login-view {
     padding: 8em 4em;
+
+    .panel-body {
+        text-align: center;
+    }
 
     .input {
         margin-top: 1.5em;

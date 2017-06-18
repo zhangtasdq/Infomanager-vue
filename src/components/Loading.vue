@@ -11,6 +11,8 @@
 <script>
 
 export default {
+    name: "v-loading",
+    
     props: {
         isShow: {
             type: Boolean,

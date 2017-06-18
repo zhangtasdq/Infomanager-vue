@@ -59,10 +59,20 @@ export default {
 
         &.left {
             text-align: left;
+
+            .nav-icon {
+                cursor: pointer;
+                padding-left: 1em;
+            }
         }
 
         &.right {
             text-align: right;
+
+            .nav-icon {
+                cursor: pointer;
+                padding-right: 1em;
+            }
         }
     }    
 }

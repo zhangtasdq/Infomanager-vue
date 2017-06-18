@@ -13,6 +13,8 @@
 <script>
 
 export default {
+    name: "v-dialog",
+    
     props: {
         isShow: {
             type: Boolean,

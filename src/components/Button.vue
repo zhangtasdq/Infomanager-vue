@@ -18,9 +18,14 @@ export default {
             type: String,
             default: "primary"
         },
+
         btnSize: {
             type: String,
             default: "normal"
+        },
+
+        btnIcon: {
+            type: String
         }
     },
 

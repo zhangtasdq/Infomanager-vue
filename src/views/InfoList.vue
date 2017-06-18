@@ -5,7 +5,7 @@
         <VNavBar :title="$t('category')" />
     </VDrawerLayout>
     <VNavBar :title="$t('infoList')">
-        <span class="nav-item-bars" @click="handleClickBars" slot="left">
+        <span class="nav-icon" @click="handleClickBars" slot="left">
             <icon name="bars" :scale="2" />        
         </span>
     </VNavBar>
@@ -50,7 +50,14 @@ export default {
 
     methods: {
         handleClickTab: function(id) {
+            if (id === 3) {
+                this.goCreateInfo();
+                return;
+            }
+        },
 
+        goCreateInfo() {
+            this.$router.push({name: "InfoEdit", params: {action: "create"}});
         },
 
         handleClickBars: function() {
@@ -66,13 +73,6 @@ export default {
     display: flex;
     flex: 1;
     flex-direction: column;
-
-    .nav-bar {
-        .nav-item-bars {
-            cursor: pointer;
-            padding-left: 1em;
-        }
-    }
 
     .content {
         flex: 2;
