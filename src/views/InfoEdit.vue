@@ -17,7 +17,7 @@
     </div>
 
     <div class="footer">
-        <VButton :btnLabel="$t('add')" />
+        <VButton :btnLabel="$t('add')" @btnClick="goAddInfoDetail" />
     </div>
 </div>
 
@@ -46,6 +46,10 @@ export default {
     methods: {
         backUp: function() {
             this.$router.go(-1);
+        },
+
+        goAddInfoDetail: function() {
+            this.$router.push({name: "InfoDetailEdit", params: {action: "create"}});
         }
     }
 }
@@ -57,7 +61,7 @@ export default {
     .content {
         padding: 1.5em;
     }
-    
+
     .footer {
         position: fixed;
         text-align: right;

@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
     <label>{{label}}</label>
-    <VInput ref="input" :initValue="initValue" />
+    <VInput ref="input" :initValue="initValue" :placeholder="placeholder" />
   </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
         initValue: {
             type: String,
             default: ""
+        },
+
+        placeholder: {
+            type: String
         }
     },
 
