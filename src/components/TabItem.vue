@@ -40,6 +40,7 @@ export default {
 <style lang="scss" scoped>
 
 .tab-item {
+    text-align: center;
     cursor: pointer;
 }
 

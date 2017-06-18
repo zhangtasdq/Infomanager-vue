@@ -46,6 +46,7 @@ export default {
     align-content: center;
     padding: 0.25em 0;
     margin: 0;
+    list-style-type: none;
     background-color: map-get($color, primary);
 
     .tab-item {

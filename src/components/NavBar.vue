@@ -1,13 +1,13 @@
 <template>
 
 <div class="nav-bar">
-    <div class="nav-item">
+    <div class="nav-item left">
         <slot name="left"></slot>
     </div>
-    <div class="nav-item">
+    <div class="nav-item center">
         <h2> {{title}} </h2>
     </div>
-    <div class="nav-item">
+    <div class="nav-item right">
         <slot name="right"></slot>
     </div>
 </div>
@@ -51,12 +51,17 @@ export default {
     .nav-item {
         flex: 1;
         color: #fff;
+        
+        h2 {
+            margin: 0;
+            text-align: center;
+        }
 
-        &:first-child {
+        &.left {
             text-align: left;
         }
 
-        &:last-child {
+        &.right {
             text-align: right;
         }
     }    

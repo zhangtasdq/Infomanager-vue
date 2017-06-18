@@ -10,6 +10,7 @@ import Toasted from "vue-toasted";
 
 import AppConfig from "./configs/app-config";
 import Language from "./i18n";
+import "./assets/css/base.scss";
 
 
 Vue.config.productionTip = false
