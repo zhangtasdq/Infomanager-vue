@@ -10,11 +10,14 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import StatusCode from "@/configs/status-code-config";
 
 import VPanel from "../components/Panel";
 import VInput from "../components/Input";
 import VButton from "../components/Button";
 import { isEmpty } from "../tools";
+import { SET_CURRENT_USER } from "@/stores/modules/user";
 
 export default {
     components: {
@@ -31,8 +34,31 @@ export default {
                 this.$toasted.show(this.$t("notice.passwordCantBeEmpty"));
                 return;
             }
+            this.login({password: inputValue});
+        },
+        clearView: function() {
+            this.$refs.passwordInput.clear();
+            this.reset();
+        },
+        ...mapActions("loginView", ["login", "reset"])
+    },
 
-            this.$router.push("InfoList");
+    computed: {
+        ...mapState("loginView", ["loginStatus", "password"])
+    },
+
+    watch: {
+        loginStatus: function(currentValue) {
+            if (currentValue) {
+                if (currentValue === StatusCode.LOGIN_FAILED) {
+                    this.$toasted.show(this.$t("notice.loginFailed"));
+                } else {
+                    this.$toasted.show(this.$t("notice.loginSuccess"));
+                    this.$store.dispatch(SET_CURRENT_USER, {password: this.password});
+                    this.$router.push("InfoList");
+                }
+                this.clearView();
+            }
         }
     }
 }

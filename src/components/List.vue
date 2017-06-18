@@ -1,7 +1,12 @@
 <template>
 
 <ul class="list">
-  <VListItem v-for="item in datas" :key="item[idProperty]" :label="item[labelProperty]" :id="item[idProperty]" @onClickItem="handleClickItem" />
+  <VListItem v-for="(item, index) in datas" 
+            :key="idProperty ? item[idProperty] : index" 
+            :label="labelProperty ? item[labelProperty] : item" 
+            :id="idProperty ? item[idProperty] : index" 
+            :isActive="item === activeItem"
+            @onClickItem="handleClickItem" />
 </ul>
 
 </template>
@@ -14,19 +19,18 @@ export default {
     name: "v-list",
     props: {
         labelProperty: {
-            type: String,
-            required: true
+            type: String
         },
 
         idProperty: {
-            type: String,
-            required: true
+            type: String
         },
 
         datas: {
             type: Array,
             required: true
-        }
+        },
+        activeItem: null
     },
 
     components: {

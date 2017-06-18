@@ -1,6 +1,6 @@
 <template>
 
-<li class="list-item" @click="handleClickItem">{{label}}</li>
+<li class="list-item" :class="{active: isActive}" @click="handleClickItem">{{label}}</li>
 
 </template>
 
@@ -17,6 +17,11 @@ export default {
         label: {
             type: String,
             required: true
+        },
+
+        isActive: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -40,5 +45,9 @@ export default {
     cursor: pointer;
     color: $font-color;
 
+    &.active {
+        background-color: map-get($color, primary);
+        color: #fff;
+    }
 }
 </style>

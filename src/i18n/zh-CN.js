@@ -21,6 +21,9 @@ export default {
     },
 
     notice: {
-        passwordCantBeEmpty: "密码不能为空!"
+        passwordCantBeEmpty: "密码不能为空!",
+        loginSuccess: "登陆成功!",
+        loginFailed: "登陆失败，请确认密码后重试!",
+        loadLocalInfoFailed: "加载本地信息失败，请退出后重试!"
     }
 };

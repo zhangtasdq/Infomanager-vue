@@ -46,7 +46,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    transition: all 0.8s ease;
+    transition: all 0.5s ease;
 }
 
 .drawlayout .shade {
@@ -74,7 +74,7 @@ export default {
 
 .drawlayout.drawlayout-enter-active .shade,
 .drawlayout.drawlayout-leave-active .shade {
-    transition: opacity 0.8s;
+    transition: opacity 0.5s;
 }
 
 .drawlayout.drawlayout-enter .content-section,
@@ -84,7 +84,7 @@ export default {
 
 .drawlayout.drawlayout-enter-active .content-section,
 .drawlayout.drawlayout-leave-active .content-section {
-    transition: width 0.8s;
+    transition: width 0.5s;
 }
 
 </style>
