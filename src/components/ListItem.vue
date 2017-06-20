@@ -44,6 +44,7 @@ export default {
     background-color: #fff;
     cursor: pointer;
     color: $font-color;
+    list-style-type: none;
 
     &.active {
         background-color: map-get($color, primary);

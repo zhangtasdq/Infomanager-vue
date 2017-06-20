@@ -4,6 +4,9 @@ import OneDriveService from "./OneDriveService";
 import AppConfig from "@/configs/app-config";
 import StatusCode from "@/configs/status-code-config";
 
+import Info from "@/models/Info";
+import InfoDetail from "@/models/InfoDetail";
+
 class InfoService {
     constructor() {
         this.infoFileName = AppConfig.infoFileName;
@@ -44,7 +47,8 @@ class InfoService {
 
     saveInfoToLocal(infos, password, callback) {
         let infoStr = JSON.stringify(infos);
-        
+        callback(null, StatusCode.SAVE_INFO_TO_LOCAL_SUCCESS);
+        /*
         AesService.encrypt(password, infoStr, (encryptError, encryptStatus, encryptData) => {
             if (encryptError) {
                 callback(encryptError, StatusCode.SAVE_INFO_TO_LOCAL_FAILED);
@@ -58,6 +62,7 @@ class InfoService {
                 }
             });
         });
+        */
     }
 
     restoreInfos(callback) {
@@ -110,7 +115,14 @@ class InfoService {
                 }
             });
         });
-        
+    }
+
+    buildEmptyInfo() {
+        return new Info("", "", []);
+    }
+
+    buildEmptyInfoDetail() {
+        return new InfoDetail("", "");
     }
 
     buildTestData() {

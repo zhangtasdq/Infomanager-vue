@@ -12,7 +12,7 @@
         </span>
     </VNavBar>
     <div class="content">
-        <VList :datas="infos" idProperty="id" labelProperty="title">
+        <VList :datas="infos" idProperty="id" labelProperty="title" @onClickItem="handleClickInfoItem">
         </VList>
     </div>
     <VTab :tabs="tabs" :scale="2.5" @onClickItem="handleClickTab" />
@@ -58,7 +58,7 @@ export default {
     computed: {
         ...mapState("infoListView", ["activeCategory", "loadLocalInfoStatus", "backupInfoStatus", "restoreInfoStatus", "loadInfos"]),
         ...mapGetters("infoListView", ["currentInfosGetter"]),
-        ...mapGetters(["allCategories"]),   
+        ...mapGetters(["allCategories", "allInfos"]),   
         ...mapGetters(["currentUserPassword"])
     },
 
@@ -96,6 +96,10 @@ export default {
             this.showDrawlayout = false;
         },
 
+        handleClickInfoItem: function(id) {
+            this.$router.push({name: "InfoShow", params: {id}});
+        },
+
         ...mapActions("infoListView", ["loadLocalInfo", "resetLoadLocalStatus", "setActiveCategory"])
     },
 
@@ -115,7 +119,11 @@ export default {
             }
         },
 
-        activeCategory: function(currentValue) {
+        activeCategory: function() {
+            this.infos = this.currentInfosGetter;
+        },
+
+        allInfos: function() {
             this.infos = this.currentInfosGetter;
         }
     }

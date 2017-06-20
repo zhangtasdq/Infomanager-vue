@@ -3,7 +3,11 @@
 <div class="dialog" v-if="isShow">
     <div class="content-wrapper">
         <div class="content">
-            <slot></slot>
+            <h2>{{msg}}</h2>
+            <div class="footer">
+                <VButton :label="btn.left.label" :type="btn.left.type" />
+                <VButton :label="btn.right.label"/>
+            </div>
         </div>
     </div>
 </div>
@@ -12,6 +16,8 @@
 
 <script>
 
+import VButton from "./Button";
+
 export default {
     name: "v-dialog",
     
@@ -19,7 +25,21 @@ export default {
         isShow: {
             type: Boolean,
             required: true
+        },
+
+        msg: {
+            type: String,
+            required: true
+        },
+
+        btn: {
+            type: Object,
+            required: true
         }
+    },
+
+    components: {
+        VButton
     }
 
 }
@@ -39,8 +59,18 @@ export default {
     background-color: rgba(20, 20, 20, 0.5);
 
     .content-wrapper {
+        position: relative;
         width: 100%;
         text-align: center;
+
+        .footer {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            bottom: 1em;
+        }
     }
 }
 
