@@ -16,6 +16,8 @@
         </VList>
     </div>
     <VTab :tabs="tabs" :scale="2.5" @onClickItem="handleClickTab" />
+    <VDialog :msg="backupDialog.msg" :buttons="backupDialog.btns" :isShow="backupDialog.isShow"  />
+    <VDialog :msg="restoreDialog.msg" :buttons="restoreDialog.btns" :isShow="restoreDialog.isShow"  />
 </div>
 
 </template>
@@ -23,28 +25,66 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 import StatusCode from "@/configs/status-code-config";
-import { VNavBar, VList, VDrawerLayout, VTab } from "../components";
+import { VNavBar, VList, VDrawerLayout, VTab, VDialog } from "../components";
 import { SET_CURRENT_INFO } from "@/stores/modules/info";
 
 export default {
     data: function() {
+        var self = this;
+
         return {
             showDrawlayout: false,
             infos: [],
             tabs: [
                 {
                     id: 1,
-                    icon: "cloud-upload"
+                    icon: "cloud-download"
                 },
                 {
                     id: 2,
-                    icon: "cloud-download"
+                    icon: "cloud-upload"
                 },
                 {
                     id: 3,
                     icon: "plus"
                 }
-            ]
+            ],
+
+            backupDialog: {
+                isShow: false,
+                msg: this.$t("dialog.backup.content"),
+                btns: [{
+                    type: "success",
+                    label: this.$t("cancel"),
+                    onClick: function() {
+                        self.backupDialog.isShow = false;
+                    }
+                }, {
+                    label: this.$t("backup"),
+                    onClick: function() {
+                        self.backupDialog.isShow = false;
+                        self.backupInfo();
+                    }
+                }]
+            },
+
+            restoreDialog: {
+                isShow: false,
+                msg: this.$t("dialog.restore.content"),
+                btns: [{
+                    type: "success",
+                    label: this.$t("cancel"),
+                    onClick: function() {
+                        self.restoreDialog.isShow = false;
+                    }
+                }, {
+                    label: this.$t("restore"),
+                    onClick: function() {
+                        self.restoreDialog.isShow = false;
+                        self.restoreInfo();
+                    }
+                }]
+            }
         };
     },
 
@@ -52,7 +92,8 @@ export default {
         VNavBar,
         VList,
         VDrawerLayout,
-        VTab
+        VTab,
+        VDialog
     },
 
     computed: {
@@ -75,7 +116,11 @@ export default {
             }
 
             if (id === 2) {
-                this.goShowInfo();
+                this.backupDialog.isShow = true;
+            }
+
+            if (id === 1) {
+                this.restoreDialog.isShow = true;
             }
         },
 
@@ -98,6 +143,14 @@ export default {
 
         handleClickInfoItem: function(id) {
             this.$router.push({name: "InfoShow", params: {id}});
+        },
+
+        backupInfo: function() {
+            
+        },
+
+        restoreInfo: function() {
+
         },
 
         ...mapActions("infoListView", ["loadLocalInfo", "resetLoadLocalStatus", "setActiveCategory"])

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-let btnColorMap = { primary: "btn-primary", danger: "btn-danger" },
+let btnColorMap = { primary: "btn-primary", danger: "btn-danger", success: "btn-success" },
     btnSizeMap = { normal: "", large: "btn-large" };
 
 export default {
@@ -46,14 +46,14 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/css/variable.scss";
 
-@mixin btn-surface($normal, $active) {
+@mixin btn-surface($normal, $active, $active_border) {
     color: #fff;
     background-color: $normal;
     border-color: $normal;
 
     &:active {
         background-color: $active;
-        border-color: $active;
+        border-color: $active_border;
     }
 }
 
@@ -65,11 +65,15 @@ export default {
     cursor: pointer;
 
     &.btn-primary {
-        @include btn-surface($primary_btn_color, $primary_btn_active_color);
+        @include btn-surface($primary_btn_color, $primary_btn_active_color, $primary_btn_active_color);
     }
 
     &.btn-danger {
-        @include btn-surface($danger_btn_color, $danger_btn_active_color);
+        @include btn-surface($danger_btn_color, $danger_btn_active_color, $danger_btn_active_color);
+    }
+
+    &.btn-success {
+        @include btn-surface($success_btn_color, $success_btn_active_color, $success_btn_active_border_color);
     }
 
     &.btn-large {

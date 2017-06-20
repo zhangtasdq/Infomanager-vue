@@ -8,6 +8,7 @@ export default {
     save: "保存",
     edit: "编辑",
     title: "标题",
+    cancel: "取消",
     editInfoDetail: "编辑信息详情",
     addInfoDetail: "添加信息详情",
     name: "名称",
@@ -15,6 +16,8 @@ export default {
     delete: "删除",
     showInfoTitle: "查看信息",
     infoDetail: "信息详情",
+    backup: "备份",
+    restore: "还原",
 
     placeholder: {
         pleaseInputPassword: "请输入密码",
@@ -35,5 +38,19 @@ export default {
         saveInfoToLocalSuccess: "保存信息成功!",
         deleteInfoFailed: "删除失败，请稍候重试!",
         deleteInfoSuccess: "删除成功!",
-    }
+    },
+
+    dialog: {
+        deleteInfo: {
+            content: "是否删除此信息?"
+        },
+
+        backup: {
+            content: "是否备份到 OneDrive ？如果备份将会覆盖以前保存的文件!"
+        },
+
+        restore: {
+            content: "是否从 OneDrive 还原? 如果还原将会覆盖当前的信息!"
+        }
+    },
 };

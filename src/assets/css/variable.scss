@@ -10,6 +10,9 @@ $primary_btn_color: map-get($color, primary);
 $primary_btn_active_color: #427FEA;
 $danger_btn_color: map-get($color,danger);
 $danger_btn_active_color: #e13838;
+$success_btn_color: map-get($color, secondary);
+$success_btn_active_color: #449d44;
+$success_btn_active_border_color: #398439;
 
 $font-color: #555;
 

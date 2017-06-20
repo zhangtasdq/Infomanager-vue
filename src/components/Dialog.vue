@@ -5,8 +5,7 @@
         <div class="content">
             <h2>{{msg}}</h2>
             <div class="footer">
-                <VButton :label="btn.left.label" :type="btn.left.type" />
-                <VButton :label="btn.right.label"/>
+                <VButton :key="index" v-for="(btn, index) in buttons" :btnLabel="btn.label" :btnType="btn.type" @btnClick="btn.onClick"  />
             </div>
         </div>
     </div>
@@ -32,8 +31,8 @@ export default {
             required: true
         },
 
-        btn: {
-            type: Object,
+        buttons: {
+            type: Array,
             required: true
         }
     },
@@ -41,16 +40,17 @@ export default {
     components: {
         VButton
     }
-
 }
 
 </script>
 
 <style lang="scss" scoped >
+@import "../assets/css/variable.scss";
 
 .dialog {
     display: flex;
     align-items: center;
+    justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -59,18 +59,34 @@ export default {
     background-color: rgba(20, 20, 20, 0.5);
 
     .content-wrapper {
+        box-sizing: border-box;
         position: relative;
-        width: 100%;
-        text-align: center;
+        width: 25em;
+        height: 10em;
+        border-radius: 4px;
+        background-color: #fff;  
 
-        .footer {
-            position: absolute;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-            bottom: 1em;
+        .content {
+            margin: 1em;
+            
+            h2 {
+                margin: 0;
+                color: $font-color;
+            }      
+
+            .footer {
+                box-sizing: border-box;
+                position: absolute;
+                left: 1em;
+                right: 1em;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                bottom: 1em;
+            }
         }
+
+       
     }
 }
 

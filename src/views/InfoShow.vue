@@ -22,13 +22,14 @@
         <VButton :btnLabel="$t('delete')" btnType="danger" @btnClick="tryDeleteInfo" />
         <VButton :btnLabel="$t('edit')" @btnClick="goEditInfo" />
     </div>
+    <VDialog :msg="deleteDialog.msg" :buttons="deleteDialog.btns" :isShow="deleteDialog.isShow"  />
 </div>
 
 </template>
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
-import { VNavBar, VButton, VFormGroup, VList } from "../components";
+import { VNavBar, VButton, VFormGroup, VList, VDialog } from "../components";
 import StatusCode from "@/configs/status-code-config";
 
 export default {
@@ -36,11 +37,34 @@ export default {
         VNavBar,
         VButton,
         VFormGroup,
-        VList
+        VList,
+        VDialog
     },
 
     data: function() {
-        return {isListenSaveToLocalStatus: false};
+        var self = this;
+
+        return {
+            isListenSaveToLocalStatus: false,
+            deleteDialog: {
+                isShow: false,
+                msg: this.$t("dialog.deleteInfo.content"),
+                btns: [{
+                    type: "success",
+                    label: this.$t("cancel"),
+                    onClick: function() {
+                        self.deleteDialog.isShow = false;
+                    }
+                }, {
+                    label: this.$t("delete"),
+                    type: "danger",
+                    onClick: function() {
+                        self.deleteDialog.isShow = false;
+                        self.executeDeleteInfo();
+                    }
+                }]
+            },
+        };
     },
 
     computed: {
@@ -64,12 +88,12 @@ export default {
         },
 
         tryDeleteInfo: function() {
-            this.executeDeleteInfo(this.currentInfo.id);;
+            this.deleteDialog.isShow = true;
         },
 
         executeDeleteInfo: function(id) {
             let infosCopy = JSON.parse(JSON.stringify(this.allInfos)),
-                newInfos = infosCopy.filter((item) => item.id !== id);
+                newInfos = infosCopy.filter((item) => item.id !== this.currentInfo.id);
 
             this.saveInfoToLocal({infos: newInfos, password: this.currentUserPassword});
         },
