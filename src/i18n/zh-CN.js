@@ -38,6 +38,10 @@ export default {
         saveInfoToLocalSuccess: "保存信息成功!",
         deleteInfoFailed: "删除失败，请稍候重试!",
         deleteInfoSuccess: "删除成功!",
+        backupInfoFailed: "备份信息失败，请稍候重试!",
+        backupInfoSuccess: "备份信息成功!",
+        restoreInfoFailed: "还原信息失败，请稍候重试!",
+        restoreInfoSuccess: "还原信息成功!"
     },
 
     dialog: {

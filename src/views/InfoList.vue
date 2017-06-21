@@ -18,6 +18,7 @@
     <VTab :tabs="tabs" :scale="2.5" @onClickItem="handleClickTab" />
     <VDialog :msg="backupDialog.msg" :buttons="backupDialog.btns" :isShow="backupDialog.isShow"  />
     <VDialog :msg="restoreDialog.msg" :buttons="restoreDialog.btns" :isShow="restoreDialog.isShow"  />
+    <VLoading :isShow="isShowLoading" />
 </div>
 
 </template>
@@ -25,7 +26,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 import StatusCode from "@/configs/status-code-config";
-import { VNavBar, VList, VDrawerLayout, VTab, VDialog } from "../components";
+import { VNavBar, VList, VDrawerLayout, VTab, VDialog, VLoading } from "../components";
 import { SET_CURRENT_INFO } from "@/stores/modules/info";
 
 export default {
@@ -34,6 +35,7 @@ export default {
 
         return {
             showDrawlayout: false,
+            isShowLoading: false,
             infos: [],
             tabs: [
                 {
@@ -63,7 +65,7 @@ export default {
                     label: this.$t("backup"),
                     onClick: function() {
                         self.backupDialog.isShow = false;
-                        self.backupInfo();
+                        self.tryBackupInfo();
                     }
                 }]
             },
@@ -81,7 +83,7 @@ export default {
                     label: this.$t("restore"),
                     onClick: function() {
                         self.restoreDialog.isShow = false;
-                        self.restoreInfo();
+                        self.tryRestoreInfo();
                     }
                 }]
             }
@@ -93,7 +95,8 @@ export default {
         VList,
         VDrawerLayout,
         VTab,
-        VDialog
+        VDialog,
+        VLoading
     },
 
     computed: {
@@ -145,15 +148,24 @@ export default {
             this.$router.push({name: "InfoShow", params: {id}});
         },
 
-        backupInfo: function() {
-            
+        tryBackupInfo: function() {
+            this.backupInfo();
         },
 
-        restoreInfo: function() {
+        tryRestoreInfo: function() {
+            this.restoreInfo();
 
         },
 
-        ...mapActions("infoListView", ["loadLocalInfo", "resetLoadLocalStatus", "setActiveCategory"])
+        ...mapActions("infoListView", [
+            "loadLocalInfo", 
+            "resetLoadLocalStatus", 
+            "setActiveCategory", 
+            "restoreInfo", 
+            "backupInfo",
+            "resetRestoreInfoStatus",
+            "resetBackupInfoStatus"
+        ])
     },
 
     watch: {
@@ -178,6 +190,38 @@ export default {
 
         allInfos: function() {
             this.infos = this.currentInfosGetter;
+        },
+
+        backupInfoStatus: function(currentValue) {
+            if (currentValue !== null) {
+                if (currentValue === StatusCode.BACKUP_INFO_BEGIN) {
+                    this.isShowLoading = true;
+                } else {
+                    if (currentValue === StatusCode.BACKUP_INFO_SUCCESS) {
+                        this.$toasted.show(this.$t("notice.backupInfoSuccess"));
+                    } else {
+                        this.$toasted.show(this.$t("notice.backupInfoFailed"));
+                    }
+                    this.isShowLoading = false;
+                    this.resetBackupInfoStatus();
+                }
+            }
+        },
+
+        restoreInfoStatus: function(currentValue) {
+            if (currentValue !== null) {
+                if (currentValue === StatusCode.RESTORE_INFO_BEGIN) {
+                    this.isShowLoading = true;
+                } else {
+                    if (currentValue === StatusCode.RESTORE_INFO_SUCCESS) {
+                        this.$toasted.show(this.$t("notice.restoreInfoSuccess"));
+                    } else {
+                        this.$toasted.show(this.$t("notice.restoreInfoFailed"));
+                    }
+                    this.isShowLoading = false;
+                    this.resetRestoreInfoStatus();
+                }
+            }
         }
     }
 }

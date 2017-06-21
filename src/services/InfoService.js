@@ -66,6 +66,9 @@ class InfoService {
     }
 
     restoreInfos(callback) {
+        setTimeout(() => callback(null, StatusCode.RESTORE_INFO_SUCCESS), 2000)
+        
+        /*
         OneDriveService.isFileExist(this.infoFileName, this.oneDriveClientId, this.oneDriveScope, (fileExistError, statusCode) => {
             if (fileExistError) {
                 callback(fileExistError, StatusCode.RESTORE_INFO_FAILED);
@@ -88,10 +91,14 @@ class InfoService {
                 });
             }
         });
+        */
         
     }
 
     backupInfos(callback) {
+        setTimeout(() => callback(null, StatusCode.BACKUP_INFO_SUCCESS), 2000);
+        
+        /*
         FileService.isFileExist(this.infoFileName, (fileExistError, fileExistStatus) => {
             if (fileExistError) {
                 return callback(fileExistError, StatusCode.BACKUP_INFO_FAILED);
@@ -115,6 +122,7 @@ class InfoService {
                 }
             });
         });
+        */
     }
 
     buildEmptyInfo() {
