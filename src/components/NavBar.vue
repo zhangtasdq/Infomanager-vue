@@ -44,26 +44,33 @@ export default {
     flex-direction: row;
     align-items: center;
     align-content: center;
-    padding: 0.25em 0;
+    padding: 0.5rem 0;
     margin: 0;
     background-color: map-get($color, primary);
 
     .nav-item {
         flex: 1;
         color: #fff;
+        align-items: center;
         
         h2 {
             margin: 0;
             text-align: center;
+            font-size: $title-size;
         }
+
 
         &.left {
             text-align: left;
 
             .nav-icon {
                 cursor: pointer;
-                padding-left: 1em;
+                padding-left: 1rem;
             }
+        }
+
+        &.center {
+            flex: 2;
         }
 
         &.right {
@@ -71,7 +78,7 @@ export default {
 
             .nav-icon {
                 cursor: pointer;
-                padding-right: 1em;
+                padding-right: 1rem;
             }
         }
     }    

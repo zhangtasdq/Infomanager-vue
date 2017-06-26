@@ -59,7 +59,8 @@ export default {
 
 .btn {
     outline: none;
-    padding: 0.8rem 1.25rem;
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;

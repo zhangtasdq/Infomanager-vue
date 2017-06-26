@@ -168,13 +168,15 @@ export default {
 
 .info-edit-view {
     .content {
-        padding: 1.5em;
+        padding: 1rem;
 
         .detail-list {
-            margin-top: 2em;
+            margin-top: 2rem;
 
             h3 {
                 margin: 0;
+                font-size: 1.2rem;
+                font-weight: 500;
             }
         }
     }
@@ -183,10 +185,10 @@ export default {
         position: fixed;
         text-align: right;
         right: 0;
-        bottom: 1em;
+        bottom: 1rem;
 
         .btn {
-            margin-right: 1em;
+            margin-right: 1rem;
         }
     }
 }

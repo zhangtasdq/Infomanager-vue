@@ -45,7 +45,7 @@ export default {
 
         h2 {
             margin: 0;
-            font-size: 1.7rem;
+            font-size: $title-size;
         }
     }
 

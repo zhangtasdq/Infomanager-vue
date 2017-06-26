@@ -106,7 +106,7 @@ export default {
 
 .info-detail-edit-view {
     .content {
-        padding: 1.5em;
+        padding: 1rem;
     }
     
     .footer {
@@ -114,10 +114,10 @@ export default {
         display: flex;
         flex-direction: row;
         width: 100%;
-        bottom: 1em;
+        bottom: 1rem;
 
         .btn {
-            margin: 0 1.5em;
+            margin: 0 1.5rem;
         }
 
         &.edit {

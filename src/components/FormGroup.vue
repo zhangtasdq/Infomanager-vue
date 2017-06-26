@@ -46,13 +46,13 @@ export default {
 <style lang="scss" scoped>
 
 .form-group {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 
     label {
         display: inline-block;
         width: 100%;
-        margin-bottom: 0.75em;
-        font-weight: 700;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
         text-align: left;
     }
 }

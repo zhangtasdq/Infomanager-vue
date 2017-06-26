@@ -142,9 +142,9 @@ export default {
 
 .info-show-view {
     .content {
-        padding: 1.5em;
+        padding: 1rem;
         .detail-list {
-            margin-top: 2em;
+            margin-top: 2rem;
 
             h3 {
                 margin: 0;
@@ -158,10 +158,10 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        bottom: 1em;
+        bottom: 1rem;
 
         .btn {
-            margin: 0 1.5em;
+            margin: 0 1.5rem;
         }
     }
 }
