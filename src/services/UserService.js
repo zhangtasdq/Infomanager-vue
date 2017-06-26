@@ -10,8 +10,6 @@ class UserService {
         let infoFileName = AppConfig.infoFileName,
             actualPassword = paddingPassword(password, AppConfig.passwordLength);
         
-        callback(null, StatusCode.LOGIN_SUCCESS, actualPassword);
-        /*
         FileService.isFileExist(infoFileName, (fileExistError, existStatusCode) => {
             if (fileExistError) {
                 return callback(fileExistError, StatusCode.LOGIN_FAILED);
@@ -34,7 +32,6 @@ class UserService {
                 })
             });
         });
-        */
     }
 }
 

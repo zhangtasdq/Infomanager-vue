@@ -15,8 +15,6 @@ class InfoService {
     }
 
     loadLocalInfo(password, callback) {
-        callback(null, StatusCode.SAVE_INFO_TO_LOCAL_SUCCESS, this.buildTestData());
-        /*
         FileService.isFileExist(this.infoFileName, (checkFileExistError, checkFileExistStatusCode) => {
             if (checkFileExistError) {
                 return callback(checkFileExistError, StatusCode.LOAD_LOCAL_INFO_FAILED);
@@ -42,13 +40,10 @@ class InfoService {
                 });
             });
         });
-        */
     }
 
     saveInfoToLocal(infos, password, callback) {
         let infoStr = JSON.stringify(infos);
-        callback(null, StatusCode.SAVE_INFO_TO_LOCAL_SUCCESS);
-        /*
         AesService.encrypt(password, infoStr, (encryptError, encryptStatus, encryptData) => {
             if (encryptError) {
                 callback(encryptError, StatusCode.SAVE_INFO_TO_LOCAL_FAILED);
@@ -62,13 +57,9 @@ class InfoService {
                 }
             });
         });
-        */
     }
 
     restoreInfos(callback) {
-        setTimeout(() => callback(null, StatusCode.RESTORE_INFO_SUCCESS), 2000)
-        
-        /*
         OneDriveService.isFileExist(this.infoFileName, this.oneDriveClientId, this.oneDriveScope, (fileExistError, statusCode) => {
             if (fileExistError) {
                 callback(fileExistError, StatusCode.RESTORE_INFO_FAILED);
@@ -91,14 +82,9 @@ class InfoService {
                 });
             }
         });
-        */
-        
     }
 
     backupInfos(callback) {
-        setTimeout(() => callback(null, StatusCode.BACKUP_INFO_SUCCESS), 2000);
-        
-        /*
         FileService.isFileExist(this.infoFileName, (fileExistError, fileExistStatus) => {
             if (fileExistError) {
                 return callback(fileExistError, StatusCode.BACKUP_INFO_FAILED);
@@ -122,7 +108,6 @@ class InfoService {
                 }
             });
         });
-        */
     }
 
     buildEmptyInfo() {

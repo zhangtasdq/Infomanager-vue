@@ -3,7 +3,7 @@
 <div class="login-view view">
     <VPanel :title="$t('login')">
         <VInput ref="passwordInput" inputType="password" :placeholder="$t('placeholder.pleaseInputPassword')" />
-        <VButton :btnLabel="$t('login')" btnSize="large" @btnClick="handleClickLogin" />
+        <VButton :btnLabel="$t('login')" btnSize="full" @btnClick="handleClickLogin" />
     </VPanel>
 </div>
 
@@ -68,19 +68,29 @@ export default {
 <style lang="scss">
 
 .login-view {
-    padding: 8em 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .panel-body {
-        text-align: center;
+    .panel {
+        width: 85%;
+
+        h2 {
+            font-size: 1.2rem;
+        }
+
+        .panel-body {
+            text-align: center;
+        }
     }
 
     .input {
-        margin-top: 1.5em;
+        margin-top: 1.5rem;
     }
 
     .btn {
-        margin-top: 2em;
-        margin-bottom: 1.5em;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 

@@ -32,6 +32,12 @@ const i18n = new VueI18n({
 const store = storeBuilder();
 sync(store, router);
 
+
+setTimeout(function() {
+
+console.log("hello");
+console.log("element => " + document.getElementById("#app"));
+}, 2000);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

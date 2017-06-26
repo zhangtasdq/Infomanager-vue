@@ -4,7 +4,7 @@
 
 <script>
 let btnColorMap = { primary: "btn-primary", danger: "btn-danger", success: "btn-success" },
-    btnSizeMap = { normal: "", large: "btn-large" };
+    btnSizeMap = { normal: "", full: "btn-full" };
 
 export default {
     name: "v-button",
@@ -59,7 +59,7 @@ export default {
 
 .btn {
     outline: none;
-    padding: 0.8em 1.25em;
+    padding: 0.8rem 1.25rem;
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -76,9 +76,10 @@ export default {
         @include btn-surface($success_btn_color, $success_btn_active_color, $success_btn_active_border_color);
     }
 
-    &.btn-large {
-        padding: 0.6em 4em;
-        font-size: 1.2em;
+    &.btn-full {
+        padding: 0.6rem 0;
+        width: 100%;
+        font-size: 1.2rem;
     }
 }
 

@@ -35,7 +35,7 @@ export default {
     border-radius: 4px;
 
     .panel-header {
-        padding: 0.75em 0 0.75em 1em;
+        padding: 0.5rem 0 0.5rem 1rem;
         text-align: left;
         border-bottom: 1px solid map-get($color, primary);
         border-top-left-radius: 3px;
@@ -45,11 +45,12 @@ export default {
 
         h2 {
             margin: 0;
+            font-size: 1.7rem;
         }
     }
 
     .panel-body {
-        padding: 1em;
+        padding: 1rem;
     }
 }
 
