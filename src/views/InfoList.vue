@@ -1,7 +1,7 @@
 <template>
 
 <div class="info-list-view view">
-    <VDrawerLayout v-bind:show.sync="showDrawlayout" :expandWidth="400" ref="drawlayout">
+    <VDrawerLayout v-bind:show.sync="showDrawlayout" :expandWidth="200" ref="drawlayout">
         <VNavBar :title="$t('category')" />
         <VList :datas="allCategories" :activeItem="activeCategory" @onClickItem="handleClickCategory">
         </VList>

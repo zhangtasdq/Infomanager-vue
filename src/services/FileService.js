@@ -2,43 +2,89 @@ import StatusCode from "@/configs/status-code-config";
 
 class FileService {
     isFileExist(fileName, callback) {
-        this._getFileTool().checkFile(this.getAppPath(), fileName).then((exists) => {
-            callback(null, StatusCode.FILE_EXIST);
-        }).catch((error) => {
-            if (this.isFileNotExistError(error)) {
-                callback(null, StatusCode.FILE_NOT_EXIST);
+        this._getFs((fsError, fs) => {
+            if (fsError) {
+                callback(fsError, StatusCode.CHEKC_FILE_EXIST_FAILED);
             } else {
-                callback(error, StatusCode.CHEKC_FILE_EXIST_FAILED);
+                fs.root.getFile(this.buildFilePath(fileName), {create: false}, () => {
+                    callback(null, StatusCode.FILE_EXIST);
+                }, () => {
+                    callback(null, StatusCode.FILE_NOT_EXIST);
+                });
             }
         });
     }
 
     getFileContent(fileName, callback) {
-        this._getFileTool().readAsText(this.getAppPath(), fileName).then((data) => {
-            callback(null, StatusCode.GET_FILE_CONTENT_SUCCESS, data);
-        }).catch((error) => {
-            callback(error, StatusCode.GET_FILE_CONTENT_FAILED);
+        this._getFileEntry(this.buildFilePath(fileName), (fileEntryError, fileEntry) => {
+            if (fileEntryError) {
+                callback(fileEntryError, StatusCode.GET_FILE_CONTENT_FAILED);
+            } else {
+                fileEntry.file((file) => {
+                    let reader = new FileReader();
+
+                    reader.onloadend = function() {
+                        callback(null, StatusCode.GET_FILE_CONTENT_SUCCESS, this.result);
+                    };
+                    reader.readAsText(file);
+                });
+            }
         });
     }
 
     saveFileContent(fileName, data, callback) {
-        this._getFileTool().writeFile(this.getAppPath(), fileName, data, {append: false, replace: true}).then(() => {
-            callback(null, StatusCode.SAVE_FILE_SUCCESS);
-        }).catch((error) => {
-            callback(error, StatusCode.SAVE_FILE_FAILED);
+        this._getFileEntry(this.buildFilePath(fileName), (fileEntryError, fileEntry) => {
+            console.log(data);
+            if (fileEntryError) {
+                callback(fileEntryError, StatusCode.SAVE_FILE_FAILED);
+            } else {
+                fileEntry.createWriter((writer) => {
+                    writer.onwriteend = function() {
+                        console.log("save success");
+                        callback(null, StatusCode.SAVE_FILE_SUCCESS);
+                    };
+
+                    writer.onerror = function(writeError) {
+                        console.log("save failed");
+                        callback(writeError, StatusCode.SAVE_FILE_FAILED);
+                    };
+                    writer.write(data);
+                });
+            }
+
         });
     }
 
+    buildFilePath(fileName) {
+        return fileName;
+    }
+
     getAppPath() {
-        return this._getFileTool().dataDirectory;
+        return cordova.file.dataDirectory;
     }
 
-     isFileNotExistError(error) {
-        return error.message === this._getFileTool().cordovaFileError[1];
+    _getFileEntry(fileName, callback) {
+        this._getFs((fsError, fs) => {
+            if (fsError) {
+                callback(fsError);
+            } else {
+                fs.root.getFile(fileName, {create: true, exclusive: false}, (fileEntry) => {
+                    callback(null, fileEntry);
+                }, (error) => {
+                    callback(error);
+                });
+            }
+            
+        });
     }
 
-    _getFileTool() {
-        return cordova.plugins.File;
+    _getFs(callback) {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (fs) => {
+            callback(null, fs);
+        }, (error) => {
+            console.log(error);
+            callback(error);
+        });
     }
 }
 

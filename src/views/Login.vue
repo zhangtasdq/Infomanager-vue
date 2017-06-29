@@ -49,15 +49,16 @@ export default {
 
     watch: {
         loginStatus: function(currentValue) {
-            if (currentValue) {
+            if (currentValue && currentValue !== StatusCode.LOGIN_BEGIN) {
                 if (currentValue === StatusCode.LOGIN_FAILED) {
                     this.$toasted.show(this.$t("notice.loginFailed"));
-                } else {
+                    this.clearView();                                    
+                } else if (currentValue === StatusCode.LOGIN_SUCCESS) {
                     this.$toasted.show(this.$t("notice.loginSuccess"));
                     this.$store.dispatch(SET_CURRENT_USER, {password: this.password});
+                    this.clearView();                                    
                     this.$router.push("InfoList");
                 }
-                this.clearView();
             }
         }
     }

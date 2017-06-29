@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="adal-1.1.19">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.microsoft.aad/adal/1.1.19/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.microsoft.aad/adal/1.1.19/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.microsoft.aad/adal/1.1.19/d26317b7ba1b2f9b461761f370c8cf5af36ecff/adal-1.1.19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

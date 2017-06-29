@@ -329,48 +329,93 @@ var FileService = function () {
         value: function isFileExist(fileName, callback) {
             var _this = this;
 
-            this._getFileTool().checkFile(this.getAppPath(), fileName).then(function (exists) {
-                callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].FILE_EXIST);
-            }).catch(function (error) {
-                if (_this.isFileNotExistError(error)) {
-                    callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].FILE_NOT_EXIST);
+            this._getFs(function (fsError, fs) {
+                if (fsError) {
+                    callback(fsError, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].CHEKC_FILE_EXIST_FAILED);
                 } else {
-                    callback(error, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].CHEKC_FILE_EXIST_FAILED);
+                    fs.root.getFile(_this.buildFilePath(fileName), { create: false }, function () {
+                        callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].FILE_EXIST);
+                    }, function () {
+                        callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].FILE_NOT_EXIST);
+                    });
                 }
             });
         }
     }, {
         key: "getFileContent",
         value: function getFileContent(fileName, callback) {
-            this._getFileTool().readAsText(this.getAppPath(), fileName).then(function (data) {
-                callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].GET_FILE_CONTENT_SUCCESS, data);
-            }).catch(function (error) {
-                callback(error, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].GET_FILE_CONTENT_FAILED);
+            this._getFileEntry(this.buildFilePath(fileName), function (fileEntryError, fileEntry) {
+                if (fileEntryError) {
+                    callback(fileEntryError, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].GET_FILE_CONTENT_FAILED);
+                } else {
+                    fileEntry.file(function (file) {
+                        var reader = new FileReader();
+
+                        reader.onloadend = function () {
+                            callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].GET_FILE_CONTENT_SUCCESS, this.result);
+                        };
+                        reader.readAsText(file);
+                    });
+                }
             });
         }
     }, {
         key: "saveFileContent",
         value: function saveFileContent(fileName, data, callback) {
-            this._getFileTool().writeFile(this.getAppPath(), fileName, data, { append: false, replace: true }).then(function () {
-                callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].SAVE_FILE_SUCCESS);
-            }).catch(function (error) {
-                callback(error, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].SAVE_FILE_FAILED);
+            this._getFileEntry(this.buildFilePath(fileName), function (fileEntryError, fileEntry) {
+                console.log(data);
+                if (fileEntryError) {
+                    callback(fileEntryError, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].SAVE_FILE_FAILED);
+                } else {
+                    fileEntry.createWriter(function (writer) {
+                        writer.onwriteend = function () {
+                            console.log("save success");
+                            callback(null, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].SAVE_FILE_SUCCESS);
+                        };
+
+                        writer.onerror = function (writeError) {
+                            console.log("save failed");
+                            callback(writeError, __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].SAVE_FILE_FAILED);
+                        };
+                        writer.write(data);
+                    });
+                }
             });
+        }
+    }, {
+        key: "buildFilePath",
+        value: function buildFilePath(fileName) {
+            return fileName;
         }
     }, {
         key: "getAppPath",
         value: function getAppPath() {
-            return this._getFileTool().dataDirectory;
+            return cordova.file.dataDirectory;
         }
     }, {
-        key: "isFileNotExistError",
-        value: function isFileNotExistError(error) {
-            return error.message === this._getFileTool().cordovaFileError[1];
+        key: "_getFileEntry",
+        value: function _getFileEntry(fileName, callback) {
+            this._getFs(function (fsError, fs) {
+                if (fsError) {
+                    callback(fsError);
+                } else {
+                    fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
+                        callback(null, fileEntry);
+                    }, function (error) {
+                        callback(error);
+                    });
+                }
+            });
         }
     }, {
-        key: "_getFileTool",
-        value: function _getFileTool() {
-            return cordova.plugins.File;
+        key: "_getFs",
+        value: function _getFs(callback) {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                callback(null, fs);
+            }, function (error) {
+                console.log(error);
+                callback(error);
+            });
         }
     }]);
 
@@ -422,12 +467,12 @@ var UserService = function () {
                     return callback(null, __WEBPACK_IMPORTED_MODULE_3__configs_status_code_config__["a" /* default */].LOGIN_SUCCESS, actualPassword);
                 }
 
-                __WEBPACK_IMPORTED_MODULE_5__FileService__["a" /* default */].getFileContent(infoFileName, function (contentError, contentCode) {
+                __WEBPACK_IMPORTED_MODULE_5__FileService__["a" /* default */].getFileContent(infoFileName, function (contentError, contentCode, content) {
                     if (contentError) {
                         return callback(contentError, __WEBPACK_IMPORTED_MODULE_3__configs_status_code_config__["a" /* default */].LOGIN_FAILED);
                     }
 
-                    __WEBPACK_IMPORTED_MODULE_6__AesService__["a" /* default */].decrypt(actualPassword, function (decryptError, decryptStatus) {
+                    __WEBPACK_IMPORTED_MODULE_6__AesService__["a" /* default */].decrypt(actualPassword, content, function (decryptError, decryptStatus) {
                         if (decryptError) {
                             callback(decryptError, __WEBPACK_IMPORTED_MODULE_3__configs_status_code_config__["a" /* default */].LOGIN_FAILED);
                         } else {
@@ -1005,7 +1050,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var btnColorMap = { primary: "btn-primary", danger: "btn-danger", success: "btn-success" },
-    btnSizeMap = { normal: "", large: "btn-large" };
+    btnSizeMap = { normal: "", full: "btn-full" };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "v-button",
@@ -1099,7 +1144,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         expandWidth: {
             type: Number,
-            default: 200
+            default: 100
         }
     },
 
@@ -1622,12 +1667,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         executeAddInfo: function executeAddInfo(info) {
             var infosCopy = JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.allInfos));
-
             infosCopy.push(info);
             this.saveInfoToLocal({ infos: infosCopy, password: this.currentUserPassword });
         }
 
-    }, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapActions */])("infoEditView", ["setCurrentInfo", "resetCurrentInfo"]), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapActions */])(["updateInfo", "addInfo"])),
+    }, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapActions */])("infoEditView", ["setCurrentInfo", "resetCurrentInfo"]), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapActions */])(["updateInfo", "addInfo", "saveInfoToLocal", "resetSaveInfoToLocalStatus"])),
 
     watch: {
         saveIntoToLocalStatusGetter: function saveIntoToLocalStatusGetter(currentValue) {
@@ -2065,15 +2109,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         loginStatus: function loginStatus(currentValue) {
-            if (currentValue) {
+            if (currentValue && currentValue !== __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].LOGIN_BEGIN) {
                 if (currentValue === __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].LOGIN_FAILED) {
                     this.$toasted.show(this.$t("notice.loginFailed"));
-                } else {
+                    this.clearView();
+                } else if (currentValue === __WEBPACK_IMPORTED_MODULE_2__configs_status_code_config__["a" /* default */].LOGIN_SUCCESS) {
                     this.$toasted.show(this.$t("notice.loginSuccess"));
                     this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_7__stores_modules_user__["a" /* SET_CURRENT_USER */], { password: this.password });
+                    this.clearView();
                     this.$router.push("InfoList");
                 }
-                this.clearView();
             }
         }
     }
@@ -2212,12 +2257,6 @@ var i18n = new __WEBPACK_IMPORTED_MODULE_3_vue_i18n__["a" /* default */]({
 
 var store = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__stores__["a" /* default */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex_router_sync__["sync"])(store, __WEBPACK_IMPORTED_MODULE_9__router__["a" /* default */]);
-
-setTimeout(function () {
-
-  console.log("hello");
-  console.log("element => " + document.getElementById("#app"));
-}, 2000);
 
 new __WEBPACK_IMPORTED_MODULE_1_vue__["a" /* default */]({
   el: '#app',
@@ -3518,7 +3557,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('VButton', {
     attrs: {
       "btnLabel": _vm.$t('login'),
-      "btnSize": "large"
+      "btnSize": "full"
     },
     on: {
       "btnClick": _vm.handleClickLogin
@@ -3756,7 +3795,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "drawlayout",
     attrs: {
       "show": _vm.showDrawlayout,
-      "expandWidth": 400
+      "expandWidth": 200
     },
     on: {
       "update:show": function($event) {
@@ -3911,4 +3950,4 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /***/ })
 
 },[65]);
-//# sourceMappingURL=app.a0325247050f8e324ea6.js.map
+//# sourceMappingURL=app.06fc7ed7d26488f86af5.js.map

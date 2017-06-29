@@ -110,13 +110,12 @@ export default {
 
         executeAddInfo: function(info) {
             let infosCopy = JSON.parse(JSON.stringify(this.allInfos));
-            
             infosCopy.push(info);
             this.saveInfoToLocal({infos: infosCopy, password: this.currentUserPassword});
         },
 
         ...mapActions("infoEditView", ["setCurrentInfo", "resetCurrentInfo"]),
-        ...mapActions(["updateInfo", "addInfo",])
+        ...mapActions(["updateInfo", "addInfo", "saveInfoToLocal", "resetSaveInfoToLocalStatus"])
     },
 
     watch: {

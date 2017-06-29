@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="onedrive-sdk-android-1.2.2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.onedrive.sdk/onedrive-sdk-android/1.2.2/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.onedrive.sdk/onedrive-sdk-android/1.2.2/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.onedrive.sdk/onedrive-sdk-android/1.2.2/5250fcd880ef069a0731be64f1a46646329526be/onedrive-sdk-android-1.2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -21,7 +21,7 @@ export default {
         },
         expandWidth: {
             type: Number,
-            default: 200
+            default: 100
         }
     },
 

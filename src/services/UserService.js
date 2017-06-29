@@ -18,12 +18,12 @@ class UserService {
                 return callback(null, StatusCode.LOGIN_SUCCESS, actualPassword);
             }
 
-            FileService.getFileContent(infoFileName, (contentError, contentCode) => {
+            FileService.getFileContent(infoFileName, (contentError, contentCode, content) => {
                 if (contentError) {
                     return callback(contentError, StatusCode.LOGIN_FAILED);
                 }
 
-                AesService.decrypt(actualPassword, (decryptError, decryptStatus) => {
+                AesService.decrypt(actualPassword, content, (decryptError, decryptStatus) => {
                     if (decryptError) {
                         callback(decryptError, StatusCode.LOGIN_FAILED);
                     } else {
