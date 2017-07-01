@@ -8,6 +8,7 @@ import VLoading from "./Loading";
 import VNavBar from "./NavBar";
 import VPanel from "./Panel";
 import VTab from "./Tab";
+import VInfoDetailExpandItem from "./InfoDetailExpandItem"
 
 export {
     VButton,
@@ -19,5 +20,6 @@ export {
     VLoading,
     VNavBar,
     VPanel,
-    VTab
+    VTab,
+    VInfoDetailExpandItem
 }

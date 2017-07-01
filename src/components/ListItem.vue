@@ -39,12 +39,13 @@ export default {
 @import "../assets/css/variable.scss";
 
 .list-item {
-    padding: 0.8em 0;
+    padding: 0.8em 0 0.8em 0.8em;
     text-align: left;
     background-color: #fff;
     cursor: pointer;
     color: $font-color;
     list-style-type: none;
+    border-top: 1px solid $list-item-split-color;
 
     &.active {
         background-color: map-get($color, primary);

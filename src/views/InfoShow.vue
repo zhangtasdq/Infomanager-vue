@@ -8,12 +8,12 @@
     </VNavBar>
 
     <div class="content">
-        <VFormGroup :initValue="currentInfo ? currentInfo.title : ''" :label="$t('title')"/>
-        <VFormGroup :initValue="currentInfo ? currentInfo.category : ''" :label="$t('category')" />
+        <VFormGroup :disabled="true" :initValue="currentInfo ? currentInfo.title : ''" :label="$t('title')"/>
+        <VFormGroup :disabled="true" :initValue="currentInfo ? currentInfo.category : ''" :label="$t('category')" />
 
         <div class="detail-list">
             <h3>{{$t("infoDetail")}}</h3>
-            <VList :datas="(currentInfo && currentInfo.details) ? currentInfo.details : []" idProperty="id" labelProperty="name">
+            <VList :renderItem="this.renderDetailItem" :datas="(currentInfo && currentInfo.details) ? currentInfo.details : []" idProperty="id" labelProperty="name">
             </VList>
         </div>
     </div>
@@ -29,7 +29,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
-import { VNavBar, VButton, VFormGroup, VList, VDialog } from "../components";
+import { VNavBar, VButton, VFormGroup, VList, VDialog, VInfoDetailExpandItem } from "../components";
 import StatusCode from "@/configs/status-code-config";
 
 export default {
@@ -38,7 +38,8 @@ export default {
         VButton,
         VFormGroup,
         VList,
-        VDialog
+        VDialog,
+        VInfoDetailExpandItem
     },
 
     data: function() {
@@ -98,6 +99,14 @@ export default {
             this.saveInfoToLocal({infos: newInfos, password: this.currentUserPassword});
         },
 
+        renderDetailItem: function(item, index, createElement) {
+            return createElement(VInfoDetailExpandItem, {
+                props: {
+                    detailItem: item
+                }
+            });
+        },
+
         ...mapActions("infoShowView", ["setCurrentInfo", "resetCurrentInfo"]),
         ...mapActions(["deleteInfo", "saveInfoToLocal", "resetSaveInfoToLocalStatus"])
     },
@@ -118,7 +127,7 @@ export default {
     },
 
     beforeRouteEnter: function(to, from, next) {
-        if (from.name === "InfoList") {
+        if (from.name === "InfoList" || from.name === "InfoEdit") {
             next((vm) => {
                 let info = vm.getInfoByRouteParam;
                 vm.setCurrentInfo({currentInfo: info});
@@ -129,8 +138,8 @@ export default {
     },
 
     beforeRouteLeave: function(to, from, next) {
-        if (to.name === "InfoList") {
-            this.isListenSaveToLocalStatus = false;
+        if (to.name === "InfoList" || to.name === "InfoEdit") {
+            this.isListenSaveToLocalStatus = false;                        
             this.resetCurrentInfo();
         }
         next(true);
@@ -148,6 +157,10 @@ export default {
 
             h3 {
                 margin: 0;
+            }
+
+            .list {
+                margin-top: 1rem;
             }
         }
     }

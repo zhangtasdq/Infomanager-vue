@@ -10,14 +10,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import StatusCode from "@/configs/status-code-config";
 
 import VPanel from "../components/Panel";
 import VInput from "../components/Input";
 import VButton from "../components/Button";
 import { isEmpty } from "../tools";
-import { SET_CURRENT_USER } from "@/stores/modules/user";
 
 export default {
     components: {
@@ -34,28 +33,31 @@ export default {
                 this.$toasted.show(this.$t("notice.passwordCantBeEmpty"));
                 return;
             }
-            this.login({password: inputValue});
+            this.userLogin({password: inputValue});
         },
         clearView: function() {
             this.$refs.passwordInput.clear();
-            this.reset();
+            this.resetUserLoginStatus();
         },
-        ...mapActions("loginView", ["login", "reset"])
+
+        ...mapActions("loginView", ["userLogin", "resetUserLoginStatus"]),
+        ...mapActions(["setCurrentUser"])
     },
 
     computed: {
-        ...mapState("loginView", ["loginStatus", "password"])
+        ...mapState("loginView", ["loginStatus"]),
+        ...mapGetters("loginView", ["currentPasswordGetter"])
     },
 
     watch: {
         loginStatus: function(currentValue) {
-            if (currentValue && currentValue !== StatusCode.LOGIN_BEGIN) {
+            if (currentValue) {
                 if (currentValue === StatusCode.LOGIN_FAILED) {
                     this.$toasted.show(this.$t("notice.loginFailed"));
                     this.clearView();                                    
                 } else if (currentValue === StatusCode.LOGIN_SUCCESS) {
                     this.$toasted.show(this.$t("notice.loginSuccess"));
-                    this.$store.dispatch(SET_CURRENT_USER, {password: this.password});
+                    this.setCurrentUser({password: this.currentPasswordGetter});
                     this.clearView();                                    
                     this.$router.push("InfoList");
                 }

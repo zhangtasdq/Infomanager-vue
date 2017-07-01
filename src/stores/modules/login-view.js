@@ -1,10 +1,12 @@
 import StatusCode from "@/configs/status-code-config";
 import UserService from "@/services/UserService";
 
-export const USER_BEGIN_LOGIN = "[User] Begin Login";
-export const USER_LOGIN_SUCCESS = "[User] Login Success";
-export const USER_LOGIN_FAILED = "[User] Login Failed";
-export const RESET_USER_LOGIN_STATUS = "[User] Reset Login Status";
+const USER_LOGIN = "loginView/Login"
+const RESET_USER_LOGIN_STATUS = "loginView/Reset Login Status";
+
+const USER_BEGIN_LOGIN = "[User] Begin Login";
+const USER_LOGIN_SUCCESS = "[User] Login Success";
+const USER_LOGIN_FAILED = "[User] Login Failed";
 
 
 export const loginViewState = {
@@ -35,7 +37,7 @@ export const loginViewState = {
     },
 
     actions: {
-        login: function({commit}, payload) {
+        userLogin: function({commit}, payload) {
             commit(USER_BEGIN_LOGIN);
 
             UserService.login(payload.password, (error, status, paddingPassword) => {
@@ -47,8 +49,14 @@ export const loginViewState = {
             });
         },
 
-        reset: function({commit}) {
+        resetUserLoginStatus: function({commit}) {
             commit(RESET_USER_LOGIN_STATUS);
+        }
+    },
+
+    getters: {
+        currentPasswordGetter: function(state) {
+            return state.password;
         }
     }
 };

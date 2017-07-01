@@ -34,18 +34,15 @@ class FileService {
 
     saveFileContent(fileName, data, callback) {
         this._getFileEntry(this.buildFilePath(fileName), (fileEntryError, fileEntry) => {
-            console.log(data);
             if (fileEntryError) {
                 callback(fileEntryError, StatusCode.SAVE_FILE_FAILED);
             } else {
                 fileEntry.createWriter((writer) => {
                     writer.onwriteend = function() {
-                        console.log("save success");
                         callback(null, StatusCode.SAVE_FILE_SUCCESS);
                     };
 
                     writer.onerror = function(writeError) {
-                        console.log("save failed");
                         callback(writeError, StatusCode.SAVE_FILE_FAILED);
                     };
                     writer.write(data);
@@ -82,7 +79,6 @@ class FileService {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (fs) => {
             callback(null, fs);
         }, (error) => {
-            console.log(error);
             callback(error);
         });
     }

@@ -61,8 +61,8 @@ export default {
     .content-wrapper {
         box-sizing: border-box;
         position: relative;
-        width: 25em;
-        height: 10em;
+        width: 85%;
+        height: 10rem;
         border-radius: 4px;
         background-color: #fff;  
 
@@ -70,6 +70,7 @@ export default {
             margin: 1em;
             
             h2 {
+                font-size: 1.2rem;
                 margin: 0;
                 color: $font-color;
             }      

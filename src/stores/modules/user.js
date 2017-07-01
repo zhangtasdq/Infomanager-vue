@@ -1,8 +1,8 @@
 import StatusCode from "@/configs/status-code-config";
 import UserService from "@/services/UserService";
 
-export const SET_CURRENT_USER = "[User] Set Current";
-export const RESET_CURRENT_USER = "[User] Reset Current";
+const SET_CURRENT_USER = "[User] Set Current";
+const RESET_CURRENT_USER = "[User] Reset Current";
 
 
 export const userState = {
@@ -11,22 +11,22 @@ export const userState = {
     },
 
     mutations: {
-        setCurrentUser: function(state, payload) {
+        [SET_CURRENT_USER]: function(state, payload) {
             state.password = payload.password;
         },
 
-        resetCurrentUser: function(state) {
+        [RESET_CURRENT_USER]: function(state) {
             state.password = "";
         }
     },
 
     actions: {
-        [SET_CURRENT_USER]: function({commit}, payload) {
-            commit("setCurrentUser", payload);
+        setCurrentUser: function({commit}, payload) {
+            commit(SET_CURRENT_USER, payload);
         },
 
-        [RESET_CURRENT_USER]: function({commit}, payload) {
-            commit("resetCurrentUser");
+        resetCurrentUser: function({commit}, payload) {
+            commit(RESET_CURRENT_USER);
         }
     },
 

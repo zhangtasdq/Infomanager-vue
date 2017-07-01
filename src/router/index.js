@@ -20,7 +20,7 @@ export default new Router({
       name: "InfoList",
       component: InfoList
     }, {
-      path: "/infoEdit",
+      path: "/infoEdit/:action/:id",
       name: "InfoEdit",
       component: InfoEdit
     }, {
@@ -28,7 +28,7 @@ export default new Router({
       name: "InfoDetailEdit",
       component: InfoDetailEdit
     }, {
-      path: "/infoShow",
+      path: "/infoShow/:id",
       name: "InfoShow",
       component: InfoShow
     }

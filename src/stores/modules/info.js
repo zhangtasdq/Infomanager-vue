@@ -1,9 +1,8 @@
 import StatusCode from "@/configs/status-code-config";
 import InfoService from "@/services/InfoService";
 
-export const SET_CURRENT_INFO = "[Info] Set Current";
-export const RESET_CURRENT_INFO = "[Info] Reset Current";
-
+const SET_ALL_INFOS = "[Info] Set All Infos";
+const RESET_ALL_INFOS = "[Info] Reset All Infos";
 const SAVE_INFO_TO_LOCAL_BEGIN = "[Info] Save Into To Local Begin";
 const SAVE_INFO_TO_LOCAL_SUCCESS = "[Info] Save Into To Local Success";
 const SAVE_INFO_TO_LOCAL_FAILED = "[Info] Save Into To Local Failed";
@@ -18,11 +17,11 @@ export const infoState = {
     },
 
     mutations: {
-        setCurrentInfos: function(state, payload) {
+        [SET_ALL_INFOS]: function(state, payload) {
             state.infos = payload.infos;
         },
 
-        resetCurrentInfos: function(state) {
+        [RESET_ALL_INFOS]: function(state) {
             state.infos = [];
         },
 
@@ -62,12 +61,12 @@ export const infoState = {
     },
 
     actions: {
-        [SET_CURRENT_INFO]: function({commit}, payload) {
-            commit("setCurrentInfos", payload);
+        setAllInfos: function({commit}, payload) {
+            commit(SET_ALL_INFOS, payload);
         },
 
-        [RESET_CURRENT_INFO]: function({commit}, payload) {
-            commit("resetCurrentInfos");
+        resetAllInfos: function({commit}, payload) {
+            commit(RESET_ALL_INFOS);
         },
 
         addInfo: function({commit}, payload) {
@@ -121,7 +120,7 @@ export const infoState = {
 
         getInfoByRouteParam: function(state, getters, rootState) {
             let infos = state.infos,
-                id = rootState.route.params.id;
+                id = parseInt(rootState.route.params.id, 10);
      
             for(let i = 0, j = infos.length; i < j; ++i) {
                 if (infos[i].id === id) {

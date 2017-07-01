@@ -1,5 +1,5 @@
 <template>
-  <input class="input" ref="input" :placeholder="placeholder" :type="inputType" :value="initValue"/>
+  <input class="input" ref="input" :placeholder="placeholder" :disabled="disabled" :type="inputType" :value="initValue"/>
 </template>
 
 <script>
@@ -21,6 +21,11 @@ export default {
         placeholder: {
             type: String,
             default: ""
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 

@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
     <label>{{label}}</label>
-    <VInput ref="input" :initValue="initValue" :placeholder="placeholder" />
+    <VInput ref="input" :initValue="initValue" :disabled="disabled" :placeholder="placeholder" />
   </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
 
         placeholder: {
             type: String
+        },
+
+        disabled: {
+            type: Boolean
         }
     },
 

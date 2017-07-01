@@ -1,16 +1,3 @@
-<template>
-
-<ul class="list">
-  <VListItem v-for="(item, index) in datas" 
-            :key="idProperty ? item[idProperty] : index" 
-            :label="labelProperty ? item[labelProperty] : item" 
-            :id="idProperty ? item[idProperty] : index" 
-            :isActive="item === activeItem"
-            @onClickItem="handleClickItem" />
-</ul>
-
-</template>
-
 <script>
 
 import VListItem from "./ListItem";
@@ -30,7 +17,10 @@ export default {
             type: Array,
             required: true
         },
-        activeItem: null
+        renderItem: {
+            type: Function
+        },        
+        activeItem: null,
     },
 
     components: {
@@ -40,7 +30,42 @@ export default {
     methods: {
         handleClickItem: function(id) {
             this.$emit("onClickItem", id);
+        },
+
+        renderDefaultItem: function(createElement) {
+            return this.datas.map((item, index) => {
+                return createElement(VListItem, {
+                    key: this.idProperty ? item[this.idProperty] : index,
+                    props: {
+                        label: this.labelProperty ? item[this.labelProperty] : item,
+                        id: this.idProperty ? item[this.idProperty] : index,
+                        isActive: this.activeItem === item
+                    },
+                    on: {
+                        onClickItem: this.handleClickItem
+                    }
+                });
+            })
+        },
+
+        getRenderContent: function(createElement) {
+            if (this.renderItem) {
+                return this.datas.map((item, index) => {
+                    return this.renderItem(item, index, createElement, this);
+                });
+            } else {
+                return this.renderDefaultItem(createElement);
+            }
         }
+    },
+
+    render: function(createElement) {
+        let item = createElement("ul", {
+            attrs: {
+                "class": "list"
+            }
+        }, this.getRenderContent(createElement));
+        return item;
     }
 };
 

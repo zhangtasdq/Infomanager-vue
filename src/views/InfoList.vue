@@ -127,10 +127,6 @@ export default {
             }
         },
 
-        goShowInfo() {
-            this.$router.push({name: "InfoShow"});
-        },
-
         goCreateInfo() {
             this.$router.push({name: "InfoEdit", params: {action: "create"}});
         },
@@ -165,22 +161,23 @@ export default {
             "backupInfo",
             "resetRestoreInfoStatus",
             "resetBackupInfoStatus"
-        ])
+        ]),
+        ...mapActions(["setAllInfos"])
     },
 
     watch: {
         loadLocalInfoStatus: function(currentValue) {
             if (currentValue) {
                 if (currentValue === StatusCode.LOAD_LOCAL_INFO_FAILED) {
-                     this.$toasted.show(this.$t("notice.loadLocalInfoFailed"));
-                } else {
-                    this.$store.dispatch(SET_CURRENT_INFO, {infos: this.loadInfos});
-
+                    this.resetLoadLocalStatus();
+                    this.$toasted.show(this.$t("notice.loadLocalInfoFailed"));
+                } else if (currentValue === StatusCode.LOAD_LOCAL_INFO_SUCCESS){
+                    this.setAllInfos({infos: this.loadInfos});
                     if (this.allCategories.length > 0) {
                         this.setActiveCategory({activeCategory: this.allCategories[0]});
                     }
+                    this.resetLoadLocalStatus();                    
                 }
-                this.resetLoadLocalStatus();
             }
         },
 
@@ -189,7 +186,11 @@ export default {
         },
 
         allInfos: function() {
-            this.infos = this.currentInfosGetter;
+            if (this.allCategories.length > 0 && this.allCategories.indexOf(this.activeCategory) === -1) {
+                this.setActiveCategory({activeCategory: this.allCategories[0]});
+            } else {
+                this.infos = this.currentInfosGetter;                
+            }
         },
 
         backupInfoStatus: function(currentValue) {
@@ -236,6 +237,6 @@ export default {
 
     .content {
         flex: 2;
-    }
+    }    
 }
 </style>

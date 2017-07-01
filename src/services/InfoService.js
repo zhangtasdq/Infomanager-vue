@@ -93,7 +93,7 @@ class InfoService {
                 return callback(null, StatusCode.BACKUP_INFO_SUCCESS);
             }
 
-            this.fileService.getFileContent(this.infoFileName, (getFileError, getFileStatus, fileContent) => {
+            FileService.getFileContent(this.infoFileName, (getFileError, getFileStatus, fileContent) => {
                 if (getFileError) {
                     callback(getFileError, StatusCode.BACKUP_INFO_FAILED);
                 } else {
@@ -116,34 +116,6 @@ class InfoService {
 
     buildEmptyInfoDetail() {
         return new InfoDetail("", "");
-    }
-
-    buildTestData() {
-        return [{
-            id: 1,
-            title: "test",
-            category: "email",
-            details: [
-                {
-                    id: 1,
-                    name: "hello",
-                    content: "world"
-                }
-            ]
-        }, {
-            id: 2,
-            title: "test2",
-            category: "email"
-        }, {
-            id: 3,
-            title: "test3",
-            category: "life",
-            details: [{
-                id: 1,
-                name: "detail-1-name",
-                content: "detail-1-content"
-            }]
-        }]
     }
 }
 

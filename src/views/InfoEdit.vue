@@ -69,7 +69,6 @@ export default {
         },
 
         goAddInfoDetail: function() {
-            window.hello = this.currentInfo;
             this.$router.push({name: "InfoDetailEdit", params: {action: "create"}});
         },
 
@@ -104,7 +103,7 @@ export default {
         executeUpdateInfo: function(info) {
             let infosCopy = JSON.parse(JSON.stringify(this.allInfos)),
                 newInfos = infosCopy.map((item) => item.id === info.id ? info : item);
-                
+
             this.saveInfoToLocal({infos: newInfos, password: this.currentUserPassword});  
         },
 
@@ -128,7 +127,7 @@ export default {
                         this.addInfo({info: this.currentInfo});
                     }
                     this.$toasted.show(this.$t("notice.saveInfoToLocalSuccess"));
-                } else {
+                } else if (currentValue === StatusCode.SAVE_INFO_TO_LOCAL_FAILED) {
                     this.$toasted.show(this.$t("notice.saveIntoToLocalFailed"));
                 }
                 this.resetSaveInfoToLocalStatus();
@@ -138,7 +137,7 @@ export default {
     },
 
     beforeRouteEnter: function(to, from, next) {
-        if (from.name === "InfoList") {
+        if (from.name === "InfoList" || from.name === "InfoShow") {
             next((vm) => {
                 let info = null;
                 if (vm.isEditInfo()) {
@@ -154,7 +153,7 @@ export default {
     },
 
     beforeRouteLeave: function(to, from, next) {
-        if (to.name === "InfoList") {
+        if (to.name === "InfoList" || to.name === "InfoShow") {
             this.isListenSaveToLocal = false;            
             this.resetCurrentInfo();
         }

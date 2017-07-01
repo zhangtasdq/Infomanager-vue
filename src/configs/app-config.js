@@ -1,5 +1,7 @@
 export default {
     language: "zhCN",
-    infoFileName: "info_data_file",
-    passwordLength: 512
+    infoFileName: "info_data_file_vue",
+    passwordLength: 512,
+    oneDriveClientId: "",
+    oneDriveScope: ["onedrive.appfolder"]
 }

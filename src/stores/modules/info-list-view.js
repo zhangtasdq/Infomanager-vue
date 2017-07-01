@@ -18,8 +18,8 @@ export const infoListViewState = {
         },
 
         localLocalInfoSuccess: function(state, payload) {
-            state.loadLocalInfoStatus = StatusCode.LOAD_LOCAL_INFO_SUCCESS;
             state.loadInfos = payload.data;
+            state.loadLocalInfoStatus = StatusCode.LOAD_LOCAL_INFO_SUCCESS;
         },
 
         loadLocalInfoFailed: function(state) {
