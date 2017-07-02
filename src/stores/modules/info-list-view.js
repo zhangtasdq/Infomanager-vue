@@ -1,121 +1,136 @@
 import StatusCode from "@/configs/status-code-config";
 import InfoService from "@/services/InfoService";
 
+import { infowListViewTypes as types } from "../mutation-types";
+
+const initState = {
+    activeCategory: "",
+    loadLocalInfoStatus: null,
+    backupInfoStatus: null,
+    restoreInfoStatus: null,
+    loadInfos: null
+};
 
 export const infoListViewState = {
     namespaced: true,
-    state: {
-        activeCategory: "",
-        loadLocalInfoStatus: null,
-        backupInfoStatus: null,
-        restoreInfoStatus: null,
-        loadInfos: null
-    },
+    state: {...initState},
 
     mutations: {
-        loadLocalInfoBegin: function(state) {
+        [types.LOAD_LOCAL_INFO_BEGIN]: function(state) {
             state.loadLocalInfoStatus = StatusCode.LOAD_LOCAL_INFO_BEGIN;
         },
 
-        localLocalInfoSuccess: function(state, payload) {
+        [types.LOAD_LOCAL_INFO_SUCCESS]: function(state, payload) {
             state.loadInfos = payload.data;
             state.loadLocalInfoStatus = StatusCode.LOAD_LOCAL_INFO_SUCCESS;
         },
 
-        loadLocalInfoFailed: function(state) {
+        [types.LOAD_LOCAL_INFO_FAILED]: function(state) {
             state.loadLocalInfoStatus = StatusCode.LOAD_LOCAL_INFO_FAILED;
         },
 
-        ressetLoadLocalInfoStatus: function(state) {
+        [types.RESET_LOAD_LOCAL_INFO_STATUS]: function(state) {
             state.loadLocalInfoStatus = null;
             state.loadInfos = null;
         },
 
-        setActiveCategory: function(state, payload) {
+        [types.SET_ACTIVITY_CATEGORY]: function(state, payload) {
             state.activeCategory = payload.activeCategory;
         },
 
-        backupInfoBegin: function(state) {
+        [types.BACKUP_INFO_BEGIN]: function(state) {
             state.backupInfoStatus = StatusCode.BACKUP_INFO_BEGIN;
         },
 
-        backupInfoFailed: function(state) {
+        [types.BACKUP_INFO_Failed]: function(state) {
             state.backupInfoStatus = StatusCode.BACKUP_INFO_FAILED;
         },
 
-        backupInfoSuccess: function(state) {
+        [types.BACKUP_INFO_SUCCESS]: function(state) {
             state.backupInfoStatus = StatusCode.BACKUP_INFO_SUCCESS;
         },
 
-        resetBackupInfoStatus: function(state) {
+        [types.RESET_BACKUP_INFO_STATUS]: function(state) {
             state.backupInfoStatus = null;
         },
 
-        restoreInfoBegin: function(state) {
+        [types.RESTORE_INFO_BEGIN]: function(state) {
             state.restoreInfoStatus = StatusCode.RESTORE_INFO_BEGIN;
         },
 
-        restoreInfoFailed: function(state) {
+        [types.RESTORE_INFO_FAILED]: function(state) {
             state.restoreInfoStatus = StatusCode.RESTORE_INFO_FAILED;
         },
 
-        restoreInfoSuccess: function(state) {
+        [types.RESTORE_INFO_SUCCESS]: function(state) {
             state.restoreInfoStatus = StatusCode.RESTORE_INFO_SUCCESS;
         },
 
-        resetRestoreInfoStatus: function(state) {
+        [types.RESET_RESTORE_INFO_STATUS]: function(state) {
             state.restoreInfoStatus = null;
+        },
+
+        [types.RESET_VIEW_STATE]: function(state) {
+            state.activeCategory = initState.activeCategory;
+            state.loadLocalInfoStatus = initState.loadLocalInfoStatus;
+            state.restoreInfoStatus = initState.restoreInfoStatus;
+            state.backupInfoStatus = initState.backupInfoStatus;
+            state.loadInfos = initState.loadInfos;
         }
     },
 
     actions: {
         loadLocalInfo: function({commit}, payload) {
-            commit("loadLocalInfoBegin");
+            commit(types.LOAD_LOCAL_INFO_BEGIN);
             InfoService.loadLocalInfo(payload.password, (error, status, data) => {
                 if (error || status === StatusCode.LOAD_LOCAL_INFO_FAILED) {
-                    commit("loadLocalInfoFailed");
+                    commit(types.LOAD_LOCAL_INFO_FAILED);
                 } else {
-                    commit("localLocalInfoSuccess", {data});
+                    commit(types.LOAD_LOCAL_INFO_SUCCESS, {data});
                 }
             });
         },
 
         resetLoadLocalStatus: function({commit}) {
-            commit("ressetLoadLocalInfoStatus");
+            commit(types.RESET_LOAD_LOCAL_INFO_STATUS);
         },
 
         setActiveCategory: function({commit}, payload) {
-            commit("setActiveCategory", payload);
+            commit(types.SET_ACTIVITY_CATEGORY, payload);
         },
 
         backupInfo: function({commit}) {
-            commit("backupInfoBegin");
+            commit(types.BACKUP_INFO_BEGIN);
             InfoService.backupInfos((error) => {
                 if (error) {
-                    commit("backupInfoFailed");
+                    commit(types.BACKUP_INFO_Failed);
                 } else {
-                    commit("backupInfoSuccess");
+                    commit(types.BACKUP_INFO_SUCCESS);
                 }
             });
         },
 
         resetBackupInfoStatus: function({commit}) {
-            commit("resetBackupInfoStatus");
+            commit(types.RESET_BACKUP_INFO_STATUS);
         },
 
         restoreInfo: function({commit}) {
-            commit("restoreInfoBegin");
+            commit(types.RESTORE_INFO_BEGIN);
             InfoService.restoreInfos((error) => {
                 if (error) {
-                    commit("restoreInfoFailed");
+                    commit(types.RESTORE_INFO_FAILED);
                 } else {
-                    commit("restoreInfoSuccess");
+                    commit(types.RESTORE_INFO_SUCCESS);
                 }
             });
         },
 
         resetRestoreInfoStatus: function({commit}) {
-            commit("resetRestoreInfoStatus");
+            commit(types.RESET_RESTORE_INFO_STATUS);
+        },
+
+        reset: function({commit}) {
+            commit(types.RESET_VIEW_STATE);
         }
     },
 

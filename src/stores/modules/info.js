@@ -1,99 +1,95 @@
 import StatusCode from "@/configs/status-code-config";
 import InfoService from "@/services/InfoService";
+import { infoTypes as types } from "../mutation-types";
 
-const SET_ALL_INFOS = "[Info] Set All Infos";
-const RESET_ALL_INFOS = "[Info] Reset All Infos";
-const SAVE_INFO_TO_LOCAL_BEGIN = "[Info] Save Into To Local Begin";
-const SAVE_INFO_TO_LOCAL_SUCCESS = "[Info] Save Into To Local Success";
-const SAVE_INFO_TO_LOCAL_FAILED = "[Info] Save Into To Local Failed";
-const RESET_SAVE_INFO_TO_LOCAL_STATUS = "[Info] Reset Save Into To Local Status";
-
-
+const initState = {
+    infos: [],
+    saveIntoToLocalStatus: null
+};
 
 export const infoState = {
-    state: {
-        infos: [],
-        saveIntoToLocalStatus: null
-    },
+    state: { ...initState },
 
     mutations: {
-        [SET_ALL_INFOS]: function(state, payload) {
+        [types.SET_ALL_INFOS]: function(state, payload) {
             state.infos = payload.infos;
         },
 
-        [RESET_ALL_INFOS]: function(state) {
-            state.infos = [];
-        },
 
-        addInfo: function(state, payload) {
+        [types.ADD_INFO]: function(state, payload) {
             state.infos.push(payload.info);
         },
 
-        updateInfo: function(state, payload) {
+        [types.UPDATE_INFO]: function(state, payload) {
             let infos = state.infos,
                 updateInfo = payload.info;
             
             state.infos = infos.map((item) => item.id === updateInfo.id ? updateInfo : item);
         },
 
-        deleteInfo: function(state, payload) {
+        [types.DELETE_INFO]: function(state, payload) {
             let infos = state.infos,
                 deleteId = payload.id;
 
             state.infos = infos.filter((item) => item.id !== deleteId);
         },
 
-        [SAVE_INFO_TO_LOCAL_BEGIN]: function(state) {
+        [types.SAVE_INFO_TO_LOCAL_BEGIN]: function(state) {
             state.saveIntoToLocalStatus = StatusCode.SAVE_INFO_TO_LOCAL_BEGIN;
         },
 
-        [SAVE_INFO_TO_LOCAL_FAILED]: function(state) {
+        [types.SAVE_INFO_TO_LOCAL_FAILED]: function(state) {
             state.saveIntoToLocalStatus = StatusCode.SAVE_INFO_TO_LOCAL_FAILED;
         },
 
-        [SAVE_INFO_TO_LOCAL_SUCCESS]: function(state) {
+        [types.SAVE_INFO_TO_LOCAL_SUCCESS]: function(state) {
             state.saveIntoToLocalStatus = StatusCode.SAVE_INFO_TO_LOCAL_SUCCESS;
         },
 
-        [RESET_SAVE_INFO_TO_LOCAL_STATUS]: function(state) {
+        [types.RESET_SAVE_INFO_TO_LOCAL_STATUS]: function(state) {
             state.saveIntoToLocalStatus = null;
+        },
+
+        [types.RESET_STATE]: function(state) {
+            state.infos = initState.infos;
+            state.saveIntoToLocalStatus = initState.saveIntoToLocalStatus;
         }
     },
 
     actions: {
         setAllInfos: function({commit}, payload) {
-            commit(SET_ALL_INFOS, payload);
-        },
-
-        resetAllInfos: function({commit}, payload) {
-            commit(RESET_ALL_INFOS);
+            commit(types.SET_ALL_INFOS, payload);
         },
 
         addInfo: function({commit}, payload) {
-            commit("addInfo", payload);
+            commit(types.ADD_INFO, payload);
         },
 
         updateInfo: function({commit}, payload) {
-            commit("updateInfo", payload);
+            commit(types.UPDATE_INFO, payload);
         },
 
         deleteInfo: function({commit}, payload) {
-            commit("deleteInfo", payload);
+            commit(types.DELETE_INFO, payload);
         },
 
         saveInfoToLocal: function({commit}, payload) {
-            commit(SAVE_INFO_TO_LOCAL_BEGIN);
+            commit(types.SAVE_INFO_TO_LOCAL_BEGIN);
             InfoService.saveInfoToLocal(payload.infos, payload.password, (error, saveStatus) => {
                 if (error) {
-                    commit(SAVE_INFO_TO_LOCAL_FAILED);
+                    commit(types.SAVE_INFO_TO_LOCAL_FAILED);
                 } else {
-                    commit(SAVE_INFO_TO_LOCAL_SUCCESS);
+                    commit(types.SAVE_INFO_TO_LOCAL_SUCCESS);
                 }
             });
         },
 
         resetSaveInfoToLocalStatus: function({commit}) {
-            commit(RESET_SAVE_INFO_TO_LOCAL_STATUS);
+            commit(types.RESET_SAVE_INFO_TO_LOCAL_STATUS);
+        },
+
+        reset: function({commit}) {
+            commit(types.RESET_STATE);
         }
     },
 

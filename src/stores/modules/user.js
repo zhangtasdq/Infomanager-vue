@@ -1,32 +1,29 @@
 import StatusCode from "@/configs/status-code-config";
 import UserService from "@/services/UserService";
+import { userTypes as types } from "../mutation-types";
 
-const SET_CURRENT_USER = "[User] Set Current";
-const RESET_CURRENT_USER = "[User] Reset Current";
-
+const initState = {password: ""};
 
 export const userState = {
-    state: {
-        password: ""
-    },
+    state: { ...initState },
 
     mutations: {
-        [SET_CURRENT_USER]: function(state, payload) {
+        [types.SET_CURRENT_USER]: function(state, payload) {
             state.password = payload.password;
         },
 
-        [RESET_CURRENT_USER]: function(state) {
-            state.password = "";
+        [types.RESET_STATE]: function(state) {
+            state.password = initState.password;
         }
     },
 
     actions: {
         setCurrentUser: function({commit}, payload) {
-            commit(SET_CURRENT_USER, payload);
+            commit(types.SET_CURRENT_USER, payload);
         },
 
-        resetCurrentUser: function({commit}, payload) {
-            commit(RESET_CURRENT_USER);
+        reset: function({commit}, payload) {
+            commit(types.RESET_STATE);
         }
     },
 

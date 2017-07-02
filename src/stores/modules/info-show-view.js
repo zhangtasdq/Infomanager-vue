@@ -1,26 +1,28 @@
+import { infoShowViewTypes as types } from "../mutation-types";
+
+const initState = {currentInfo: null};
+
 export const infoShowViewState = {
     namespaced: true,
-    state: {
-        currentInfo: null
-    },
+    state: { ...initState },
 
     mutations: {
-        setCurrentInfo: function(state, payload) {
+        [types.SET_CURRENT_INFO]: function(state, payload) {
             state.currentInfo = payload.currentInfo;
         },
 
-        resetCurrentInfo: function(state) {
-            state.currentInfo = null;
+        [types.RESET_VIEW_STATE]: function(state) {
+            state.currentInfo = initState.currentInfo;
         }
     },
 
     actions: {
         setCurrentInfo: function({commit}, payload) {
-            commit("setCurrentInfo", payload);
+            commit(types.SET_CURRENT_INFO, payload);
         },
 
-        resetCurrentInfo: function({commit}) {
-            commit("resetCurrentInfo")
+        reset: function({commit}) {
+            commit(types.RESET_VIEW_STATE);
         }
     }
 };

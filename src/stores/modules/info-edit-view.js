@@ -1,60 +1,67 @@
+import { infoEditViewTypes as types } from "../mutation-types";
+
+const initState = {currentInfo: null};
+
 export const infoEditViewState = {
     namespaced: true,
-    state: {
-        currentInfo: null
-    },
+    state: { ...initState },
 
     mutations: {
-        setCurrentInfo: function(state, payload) {
+        [types.SET_CURRENT_INFO]: function(state, payload) {
             state.currentInfo = payload.currentInfo;
         },
 
-        addDetailItem: function(state, payload) {
+        [types.ADD_DETAIL_ITEM]: function(state, payload) {
             window.world = state.currentInfo;
             state.currentInfo.details.push(payload.detailItem);
         },
 
-        updateDetailItem: function(state, payload) {
+        [types.UPDATE_DETAIL_ITEM]: function(state, payload) {
             let info = state.currentInfo,
                 updateItem = payload.detailItem;
 
             info.details = info.details.map((item) => item.id === updateItem.id ? updateItem : item);
         },
 
-        deleteDetailItem: function(state, payload) {
+        [types.UPDATE_DETAIL_ITEM]: function(state, payload) {
             let info = state.currentInfo,
                 deleteItem = payload.detailItem;
 
             info.details = info.details.filter((item) => item.id !== deleteItem.id);
         },
 
-        resetCurrentInfo: function(state) {
+        [types.RESET_CURRENT_INFO]: function(state) {
             state.currentInfo = null;
+        },
+
+        [types.RESET_VIEW_STATE]: function(state) {
+            state.currentInfo = initState.currentInfo;
         }
     },
 
     actions: {
         setCurrentInfo: function({commit}, payload) {
-            commit("setCurrentInfo", payload);
+            commit(types.SET_CURRENT_INFO, payload);
         },
 
         addDetailItem: function({commit}, payload) {
-            commit("addDetailItem", payload);
+            commit(types.ADD_DETAIL_ITEM, payload);
         },
 
         updateDetailItem: function({commit}, payload) {
-            commit("updateDetailItem", payload);
+            commit(types.UPDATE_DETAIL_ITEM, payload);
         },
 
         deleteDetailItem: function({commit}, payload) {
-            commit("deleteDetailItem", payload);
+            commit(types.DELETE_DETAIL_ITEM, payload);
         },
 
         resetCurrentInfo: function({commit}) {
-            commit("resetCurrentInfo");
-        }
-    },
+            commit(types.RESET_CURRENT_INFO);
+        },
 
-    getters: {
+        reset: function({commit}) {
+            commit(types.RESET_VIEW_STATE);
+        }
     }
 };

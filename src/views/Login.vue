@@ -59,7 +59,7 @@ export default {
                     this.$toasted.show(this.$t("notice.loginSuccess"));
                     this.setCurrentUser({password: this.currentPasswordGetter});
                     this.clearView();                                    
-                    this.$router.push("InfoList");
+                    this.$router.replace("InfoList");
                 }
             }
         }

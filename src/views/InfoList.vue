@@ -128,7 +128,7 @@ export default {
         },
 
         goCreateInfo() {
-            this.$router.push({name: "InfoEdit", params: {action: "create"}});
+            this.$router.push({name: "InfoEdit", params: {action: "create", id: -1}});
         },
 
         handleClickBars: function() {
