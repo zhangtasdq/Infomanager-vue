@@ -17,7 +17,6 @@
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-onedrivetool": "git+https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git",
-        "cordova-plugin-whitelist": "^1.3.2",
         "css-loader": "^0.28.4",
         "sass-loader": "^6.0.6",
         "vue": "^2.3.3",
@@ -31,7 +30,6 @@
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-whitelist": {},
             "cordova-plugin-aestool": {},
             "cordova-plugin-onedrivetool": {},
             "cordova-plugin-file": {}
