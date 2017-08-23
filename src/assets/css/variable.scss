@@ -1,0 +1,23 @@
+$color: (
+    primary:    #488aff,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222
+);
+
+$primary_btn_color: map-get($color, primary);
+$primary_btn_active_color: #427FEA;
+$danger_btn_color: map-get($color,danger);
+$danger_btn_active_color: #e13838;
+$success_btn_color: map-get($color, secondary);
+$success_btn_active_color: #449d44;
+$success_btn_active_border_color: #398439;
+
+$font-color: #555;
+
+$panel-border-color: #ddd;
+
+$input-focus-border-color: #66afe9;
+$title-size: 1.5rem;
+$list-item-split-color: #aaa;

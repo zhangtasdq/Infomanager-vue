@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.cqmyg.infomanager"
-        },
         "cordova-plugin-aestool": {
             "PACKAGE_NAME": "com.cqmyg.infomanager"
         },

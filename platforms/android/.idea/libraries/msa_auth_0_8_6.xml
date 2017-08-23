@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="msa-auth-0.8.6">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.microsoft.services.msa/msa-auth/0.8.6/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.microsoft.services.msa/msa-auth/0.8.6/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.microsoft.services.msa/msa-auth/0.8.6/b6dd8a6b5ce68ee38b31af23471cf13ebe2c45e0/msa-auth-0.8.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
