@@ -31,9 +31,9 @@ InfoManger
 ```shell
 npm install
 
-ionic plugin add cordova-plugin-file
-ionic plugin add https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git
-ionic plugin add https://github.com/zhangtasdq/cordova-plugin-aestool.git
+cordova plugin add cordova-plugin-file
+cordova plugin add https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git
+cordova plugin add https://github.com/zhangtasdq/cordova-plugin-aestool.git
 
 ```
 
