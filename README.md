@@ -1,21 +1,58 @@
-# vue-template
+InfoManger
+===
+A very small information management tool，You can save the encrypted information to `OneDrive`，
+And restore from `OneDrive`. Developed using `Vue + redux`. Currently only supports `Android`.
 
-> A Vue.js project
+Screenshot
+---
+see the video in screenshot folder
 
-## Build Setup
+Development Background
+---
+Because now we have too many accounts, to remember all too difficult.So write a tool to save.
 
-``` bash
-# install dependencies
+Features
+---
+1. This application does not save passwords for encrypted messages, so you must keep in mind your password.
+2. You can back up the encrypted information to `OneDrive`, And restore it from` OneDrive` to avoid losing information.
+3. I18N.
+
+The login process
+---
+1. When the login, check the application directory for encrypted files, if the file does not exist into the application.
+2. If there is an encrypted file, use the password to decrypt, if the decryption is successful then into the application, or password is not correct.
+
+
+Install
+---
+
+1. Build the [Cordova](http://cordova.apache.org/#getstarted) development environment
+2. Installing Dependencies
+
+```shell
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+ionic plugin add cordova-plugin-file
+ionic plugin add https://github.com/zhangtasdq/cordova-plugin-onedrivetool.git
+ionic plugin add https://github.com/zhangtasdq/cordova-plugin-aestool.git
 
-# build for production with minification
-npm run build
+```
+3.Run
 
-# build for production and view the bundle analyzer report
-npm run build --report
+```shell
+cordova run android
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+OneDrive
+---
+1. Register your application [Here](https://dev.onedrive.com/app-registration.htm#register-your-app-for-onedrive).
+2. Write the obtained `clientid` to `src/configs/AppConfig.js#oneDriveClientId`.
+3. Sign up for a [Microsoft](https://account.microsoft.com) account.
+4. Restart the program.
+
+Finally
+---
+> I do not know how to design the `state`, if you know I hope you can tell me, thank you!
+
+>If you have any question or suggestions please tell me, thank you !  :)
